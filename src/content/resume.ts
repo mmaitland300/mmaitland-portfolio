@@ -51,7 +51,7 @@ export const resumeSkillTiers: ResumeSkillTier[] = [
   },
   {
     id: "working",
-    title: "Production / Working",
+    title: "Working Project Experience",
     skills: [
       "Prisma",
       "PostgreSQL",
