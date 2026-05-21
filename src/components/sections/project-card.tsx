@@ -35,8 +35,11 @@ const proofKindLabel: Record<
   test: "test",
   ci: "ci",
   post: "decision record",
-  artifact: "case study",
+  "case-study": "case study",
+  "product-page": "product page",
+  artifact: "artifact",
   release: "release",
+  walkthrough: "walkthrough",
   workflow: "workflow",
 };
 

@@ -89,8 +89,11 @@ describe("projects data integrity", () => {
       "test",
       "ci",
       "post",
+      "case-study",
+      "product-page",
       "artifact",
       "release",
+      "walkthrough",
       "workflow",
     ]);
 
@@ -154,6 +157,20 @@ describe("projects data integrity", () => {
         link.href.includes("docs/workflow-walkthrough.md")
       )
     ).toBe(true);
+  });
+
+  it("uses precise supporting-link kinds for non-case-study artifacts", () => {
+    const stringflux = projects.find((p) => p.slug === "stringflux");
+    const organizer = projects.find((p) => p.slug === "sample-organizer");
+
+    expect(
+      stringflux?.proofLinks?.find((link) => link.label.includes("product page"))
+        ?.kind
+    ).toBe("product-page");
+    expect(
+      organizer?.proofLinks?.find((link) => link.label === "Visual walkthrough")
+        ?.kind
+    ).toBe("walkthrough");
   });
 
   it("surfaces Musicians Organizer as a desktop prototype", () => {

@@ -21,8 +21,11 @@ export type ProofLinkKind =
   | "test"
   | "ci"
   | "post"
+  | "case-study"
+  | "product-page"
   | "artifact"
   | "release"
+  | "walkthrough"
   | "workflow";
 
 export interface ProofLink {
@@ -89,7 +92,7 @@ export const projects: Project[] = [
       {
         label: "StringFlux case study",
         href: "/projects/stringflux",
-        kind: "artifact",
+        kind: "case-study",
       },
       {
         label: "Oversampling decision log",
@@ -99,7 +102,7 @@ export const projects: Project[] = [
       {
         label: "StringFlux public product page",
         href: "/stringflux",
-        kind: "artifact",
+        kind: "product-page",
       },
     ],
     tags: [
@@ -137,7 +140,7 @@ export const projects: Project[] = [
       {
         label: "Research Radar case study",
         href: "/projects/research-radar",
-        kind: "artifact",
+        kind: "case-study",
       },
       {
         label: "Research Radar source repo",
@@ -196,7 +199,7 @@ export const projects: Project[] = [
       {
         label: "mmaitland.dev build notes",
         href: "/projects/portfolio-site",
-        kind: "artifact",
+        kind: "case-study",
       },
       {
         label: "Contact decision record",
@@ -261,7 +264,7 @@ export const projects: Project[] = [
       {
         label: "Full Swing case study",
         href: "/projects/full-swing-tech-support",
-        kind: "artifact",
+        kind: "case-study",
       },
       {
         label: "Troubleshooting playbook",
@@ -343,7 +346,7 @@ export const projects: Project[] = [
       {
         label: "Snake Detector case study",
         href: "/projects/snake-detector",
-        kind: "artifact",
+        kind: "case-study",
       },
       {
         label: "Training repo",
@@ -371,7 +374,7 @@ export const projects: Project[] = [
       {
         label: "Visual walkthrough",
         href: "https://github.com/mmaitland300/musicians-organizer#visual-walkthrough",
-        kind: "artifact",
+        kind: "walkthrough",
       },
       {
         label: "Workflow walkthrough",
