@@ -26,9 +26,9 @@ export function ProjectGrid() {
           Featured case studies
         </h2>
         <p className="mt-2 mx-auto max-w-2xl text-sm text-muted-foreground">
-          Each entry has a dedicated case-study page with artifacts, tradeoffs,
-          and supporting links. Cards are expanded here for deeper scanning than
-          the homepage preview row.
+          Larger projects include case studies or notes with the useful parts,
+          tradeoffs, and current limits. Cards here give more context than the
+          homepage preview row.
         </p>
       </div>
 

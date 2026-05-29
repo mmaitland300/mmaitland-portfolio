@@ -6,7 +6,7 @@ import { SectionHeader } from "@/components/ui/section-header";
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "Featured case studies with clear status, supporting links, and known limits. Experiments sit in their own section so the flagship work stays easy to scan.",
+    "Projects grouped by what they are, why I built them, what works now, and what is still limited.",
 };
 
 export default function ProjectsPage() {
@@ -17,7 +17,7 @@ export default function ProjectsPage() {
         <SectionHeader
           eyebrow="Projects"
           title="Case Studies and Experiments"
-          description="Selected projects with status, supporting links, and known limits. Experiments and smaller builds are grouped below so the main thread stays easy to scan."
+          description="Selected projects grouped by what they are, why I built them, what works now, and what is still limited. Smaller experiments are grouped separately."
           className="mb-12"
         />
         <ProjectGrid />
