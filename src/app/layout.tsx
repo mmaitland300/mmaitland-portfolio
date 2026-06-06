@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: "%s | Matt Maitland",
   },
   description:
-    "Robotics technician building web software, audio DSP tools, music, and research prototypes. Case studies, blog, and contact.",
+    "Robotics technician building web software and audio DSP tools, writing and producing music, and working on research prototypes. Case studies, blog, and contact.",
   keywords: [
     "Matt Maitland",
     "robotics technician",

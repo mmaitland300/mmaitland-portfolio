@@ -44,9 +44,8 @@ export function Hero() {
           transition={fadeTrans(0.12)}
           className="mt-5 mx-auto max-w-4xl text-2xl font-semibold leading-tight text-foreground/95 sm:text-3xl"
         >
-          I work hands-on with robotics systems, and I build web software,
-          audio DSP tools, music, and research prototypes around things I want
-          to understand.
+          I work hands-on with robotics systems, build web software and audio
+          DSP tools, write and produce music, and work on research prototypes.
         </motion.h2>
 
         <motion.p
@@ -56,8 +55,9 @@ export function Hero() {
         >
           I currently work as a Robotics Technician at Barn Owl Precision.
           Before that, I supported complex simulator systems. Outside of work I
-          build web software, audio DSP tools, music, and research prototypes.
-          This site collects the projects and notes that come out of that work.
+          build web software and audio DSP tools, write and produce music, and
+          work on research prototypes. This site collects those projects,
+          notes, and music.
         </motion.p>
 
         <motion.div

@@ -7,7 +7,7 @@ import { getPublicContactEmail } from "@/lib/site-contact";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Robotics technician building web software, audio DSP tools, music, and research prototypes. Current role is Robotics Technician at Barn Owl Precision; earlier work included supporting complex simulator systems.",
+    "Robotics technician building web software and audio DSP tools, writing and producing music, and working on research prototypes. Current role is Robotics Technician at Barn Owl Precision; earlier work included supporting complex simulator systems.",
 };
 
 export default function AboutPage() {
@@ -18,7 +18,7 @@ export default function AboutPage() {
         <SectionHeader
           eyebrow="About"
           title="Robotics technician, web software, and audio DSP"
-          description="Current role is Robotics Technician at Barn Owl Precision. Earlier work included supporting complex simulator systems. Outside of that I build web software, audio DSP tools, music, and research prototypes. The troubleshooting habits carry across all of it."
+          description="Current role is Robotics Technician at Barn Owl Precision. Earlier work included supporting complex simulator systems. Outside of that I build web software and audio DSP tools, write and produce music, and work on research prototypes. The troubleshooting habits carry across all of it."
           className="mb-16"
         />
         <AboutContent publicEmail={getPublicContactEmail()} />

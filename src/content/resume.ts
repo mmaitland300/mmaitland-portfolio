@@ -32,7 +32,7 @@ export type ResumeSkillTier = {
 };
 
 export const resumeSummary =
-  "Robotics Technician at Barn Owl Precision with a background in layered technical support, Windows and various Linux systems, networking, connected hardware, and software projects. Previously, I supported complex simulator systems. Outside work, I build web software, audio DSP tools, music, and research prototypes around things I want to understand, including mmaitland.dev, StringFlux, NEUROCHEMICAL ENTROPY, and Research Radar.";
+  "Robotics Technician at Barn Owl Precision with a background in layered technical support, Windows and various Linux systems, networking, connected hardware, and software projects. Previously, I supported complex simulator systems. Outside work, I build web software and audio DSP tools, write and produce music, and work on research prototypes, including mmaitland.dev, StringFlux, NEUROCHEMICAL ENTROPY, and Research Radar.";
 
 export const resumeSkillTiers: ResumeSkillTier[] = [
   {
@@ -95,7 +95,7 @@ export const resumeExperience: ResumeExperienceItem[] = [
     company: "Self-directed",
     period: "2022 - Present",
     description:
-      "Self-directed web software, audio DSP, and music work built around things I wanted to understand better or tools I wanted to use, maintained around full-time work with public notes on scope, decisions, and limits.",
+      "Self-directed web software and audio DSP projects, plus original music, maintained around full-time work with public notes on scope, decisions, and limits.",
     highlights: [
       {
         text: "Built mmaitland.dev with typed content, CI, smoke tests, contact validation, rate limiting, and optional admin workflows.",
