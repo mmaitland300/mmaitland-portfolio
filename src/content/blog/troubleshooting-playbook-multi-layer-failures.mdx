@@ -1,6 +1,6 @@
 ---
 title: "Troubleshooting Playbook: Isolating Multi-Layer Failures"
-description: "How I approach incidents where hardware, software, networking, and OS factors overlap. Based on recent support work."
+description: "How I approached simulator incidents where a dropped shot could come from calibration, networking, drivers, or the app. Based on prior support work."
 date: "2026-03-20"
 type: "Case Study"
 tags: ["Troubleshooting"]
@@ -17,7 +17,7 @@ It took three sessions to find the actual cause: a consumer-grade network switch
 
 That incident is why I stopped guessing and started using a structured approach.
 
-## What I Do Now
+## The Workflow I Used
 
 ### Classify by layer before touching anything
 
@@ -61,4 +61,4 @@ This approach is slower per ticket than jumping straight to the most likely fix.
 
 ## Where This Has Helped
 
-Using this workflow consistently has made my triage more predictable. The same types of failures (calibration drift after firmware updates, licensing timeouts on network changes, display issues after Windows updates) now have documented paths I can hand to the next person on shift. The payoff shows up as fewer callbacks and less rework, even when a single ticket takes longer on the first pass.
+Using this workflow consistently made my triage more predictable. The same types of failures (calibration drift after firmware updates, licensing timeouts on network changes, display issues after Windows updates) had documented paths I could hand to the next person on shift. The payoff showed up as fewer callbacks and less rework, even when a single ticket took longer on the first pass.

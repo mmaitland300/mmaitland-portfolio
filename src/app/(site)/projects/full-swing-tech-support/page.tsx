@@ -17,7 +17,7 @@ const TRIAGE_ARTIFACT_SRC = "/images/projects/full-swing-triage-artifact.svg";
 export const metadata: Metadata = {
   title: "Full Swing Technical Support Case Study",
   description:
-    "Troubleshooting case study from simulator support at Auxillium: Full Swing focus, with Laser Shot and E6 Golf from TruGolf on shared installs. Triage, failure isolation, and tradeoffs.",
+    "Troubleshooting case study from prior support work with complex simulator systems. Triage, failure isolation, and tradeoffs.",
 };
 
 export const dynamic = "force-dynamic";
@@ -132,7 +132,7 @@ export default function FullSwingCaseStudyPage() {
             align="left"
             eyebrow="Case Study"
             title="Full Swing Technical Support Case Study"
-            description="I work this role at Auxillium, which provides technical support for Full Swing simulator customers. The examples here center on that stack; many of the same environments also include Laser Shot or E6 Golf from TruGolf, supported in the same workflow. The case study is about how multi-layer issues get diagnosed with remote-only access, incomplete logs, and privacy limits on what can be shared, where hardware, software, networking, and operating-system behavior frequently overlap."
+            description="This case study comes from prior work supporting complex simulator systems. It focuses on how multi-layer issues get diagnosed with remote-only access, incomplete logs, and privacy limits on what can be shared."
             descriptionClassName="max-w-3xl"
             badges={
               <>
@@ -190,8 +190,8 @@ export default function FullSwingCaseStudyPage() {
               />
             </div>
             <figcaption className="border-t border-border bg-card/50 px-4 py-3 text-center text-xs leading-relaxed text-muted-foreground">
-              Auxillium-authored triage sketch for multi-layer simulator
-              support, separate from Full Swing vendor artwork.
+              Public triage sketch for multi-layer simulator support, separate
+              from Full Swing vendor artwork.
             </figcaption>
           </figure>
           <p className="mb-4 text-sm text-muted-foreground">

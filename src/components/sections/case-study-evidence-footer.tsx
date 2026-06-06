@@ -9,6 +9,7 @@ const statusLabel: Record<NonNullable<Project["status"]>, string> = {
   "live-prototype": "Live prototype",
   "live-demo": "Live demo",
   "current-role": "Current role",
+  "prior-role": "Prior role",
   "source-installable": "Source-installable milestone",
   "desktop-prototype": "Desktop prototype",
   shipped: "Shipped",

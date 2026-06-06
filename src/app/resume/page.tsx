@@ -6,7 +6,7 @@ import { getPublicContactEmail } from "@/lib/site-contact";
 export const metadata: Metadata = {
   title: "Resume",
   description:
-    "Resume for Matt Maitland: technical support (Full Swing via Auxillium), web and audio side projects, and self-directed software.",
+    "Resume for Matt Maitland: Robotics Technician at Barn Owl Precision, prior support for complex simulator systems, and self-directed web software, audio DSP, and music.",
 };
 
 export default function ResumePage() {

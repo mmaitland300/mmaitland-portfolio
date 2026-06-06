@@ -7,7 +7,7 @@ import { getPublicContactEmail } from "@/lib/site-contact";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Technical support specialist and practical web developer. Day job is Auxillium supporting Full Swing simulators; side work is web apps, audio tools, and research prototypes. Same habits, different problem domains.",
+    "Robotics technician building web software, audio DSP tools, music, and research prototypes. Current role is Robotics Technician at Barn Owl Precision; earlier work included supporting complex simulator systems.",
 };
 
 export default function AboutPage() {
@@ -17,8 +17,8 @@ export default function AboutPage() {
       <div className="mx-auto max-w-4xl px-6">
         <SectionHeader
           eyebrow="About"
-          title="Technical support specialist and practical web developer"
-          description="Day job is supporting Full Swing simulator environments at Auxillium. Outside of that I build web apps, audio tools, and research prototypes. The triage habits from support work carry directly into how I build software."
+          title="Robotics technician, web software, and audio DSP"
+          description="Current role is Robotics Technician at Barn Owl Precision. Earlier work included supporting complex simulator systems. Outside of that I build web software, audio DSP tools, music, and research prototypes. The troubleshooting habits carry across all of it."
           className="mb-16"
         />
         <AboutContent publicEmail={getPublicContactEmail()} />

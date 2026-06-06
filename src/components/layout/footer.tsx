@@ -34,8 +34,8 @@ export function Footer() {
               </span>
             </Link>
             <p className="mt-3 text-sm text-muted-foreground max-w-xs">
-              Technical support specialist building practical web software,
-              audio tools, and research prototypes.
+              Robotics technician building web software, audio DSP tools,
+              music, and research prototypes.
             </p>
           </div>
 

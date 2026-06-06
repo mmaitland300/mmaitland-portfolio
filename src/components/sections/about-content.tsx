@@ -38,21 +38,23 @@ export function AboutContent({ publicEmail }: AboutContentProps) {
     <div className="space-y-16">
       <motion.section {...fadeUp}>
         <p className="text-lg font-medium text-foreground leading-relaxed">
-          Most of my day is diagnosing problems where the symptom and the root
-          cause live in different layers. A customer may report bad ball
-          tracking, but the actual cause can be a network device, a driver
-          regression, a calibration issue, or a mixed system state after an
-          update.
+          A lot of my work comes down to diagnosing problems where the symptom
+          and the root cause live in different layers. In robotics, past
+          support work, web software, and audio DSP,
+          the visible failure is often only the first clue: hardware state,
+          environment, operating-system behavior, connectivity, and human
+          context can all be part of the real cause.
         </p>
         <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
-          I do that full-time with Auxillium, supporting Full Swing software and
-          technology. Laser Shot and E6 Golf from TruGolf are often on the same
-          install. It taught me to work from observation, isolate variables, and
-          distrust fixes that cannot be reproduced.
+          I currently do that as a Robotics Technician at Barn Owl Precision.
+          Before that, I supported complex simulator systems. That support work
+          taught me to work from observation, isolate variables, and distrust
+          fixes that cannot be reproduced.
         </p>
         <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
-          Those habits still apply when I work on my own projects: web apps,
-          audio tools, and music. I still care about naming real limits: remote
+          Those habits still apply when I work on my own projects: web
+          software, audio DSP tools, and music. I still care about naming real
+          limits: remote
           diagnosis with incomplete information, Windows and display stack
           overlap, real-time audio deadline pressure, and small-scope solo
           maintenance.
@@ -107,8 +109,8 @@ export function AboutContent({ publicEmail }: AboutContentProps) {
         <p className="text-lg text-muted-foreground leading-relaxed">
           I write, record, produce, and master original work as NEUROCHEMICAL
           ENTROPY, and that practice directly affects how I think about timing,
-          feel, interfaces, and audio software. StringFlux exists because those
-          two sides of my work overlap.
+          feel, interfaces, and audio DSP software. StringFlux exists because
+          those two sides of my work overlap.
         </p>
       </motion.section>
 

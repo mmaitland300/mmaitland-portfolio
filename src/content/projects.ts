@@ -12,6 +12,7 @@ export type ProjectStatus =
   | "live-prototype"
   | "live-demo"
   | "current-role"
+  | "prior-role"
   | "source-installable"
   | "desktop-prototype"
   | "shipped"
@@ -59,7 +60,7 @@ export interface Project {
   category: ProjectCategory;
 }
 
-/** Homepage grid: practical tooling first, then support, research, and audio work. */
+/** Homepage grid: practical tooling first, then support case study, research, and audio work. */
 export const HOMEPAGE_FEATURED_SLUGS = [
   "smart-project-backup",
   "full-swing-tech-support",
@@ -245,17 +246,17 @@ export const projects: Project[] = [
     slug: "full-swing-tech-support",
     title: "Full Swing Technical Support",
     description:
-      "My day job. I work at Auxillium supporting Full Swing simulator customers remotely. Many setups also run Laser Shot or E6 Golf from TruGolf, which I support on the same tickets. This case study documents the triage approach I've built from that work.",
+      "Prior support work with complex simulator systems. This case study documents the triage approach I built from that work.",
     problem:
       "Simulator issues rarely have one cause. A customer reports \"the ball isn't tracking\" and the root cause could be calibration drift, a licensing timeout, a network config problem, or a Windows update that broke a driver.",
     constraints:
       "Remote support, incomplete logs, frustrated users, mixed hardware/software/network symptoms, and privacy limits on public detail.",
     tradeoff:
       "More time upfront on isolation and logging pays back when the same failure signature shows up again: you reopen the checklist instead of re-deriving the path from memory.",
-    role: "Technical support specialist at Auxillium. Scope is Full Swing simulator deployments plus Laser Shot and E6 Golf from TruGolf when those are part of the install.",
+    role: "Technical support specialist supporting complex simulator systems.",
     outcome:
-      "Built repeatable triage workflows that I now use across calibration, licensing, display, networking, and OS subsystems. Documented publicly as a case study.",
-    status: "current-role",
+      "Built repeatable triage workflows across calibration, licensing, display, networking, and OS subsystems. Documented publicly as a case study.",
+    status: "prior-role",
     evidence:
       "Public case study includes workflow artifact, representative incident pattern, and troubleshooting playbook linkage.",
     knownLimits:

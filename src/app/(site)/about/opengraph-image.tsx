@@ -8,6 +8,6 @@ export const contentType = "image/png";
 export default function OgImage() {
   return createOgImage(
     "About",
-    "Technical support specialist and practical software builder"
+    "Robotics technician, web software, audio DSP, and music"
   );
 }

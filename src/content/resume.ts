@@ -32,7 +32,7 @@ export type ResumeSkillTier = {
 };
 
 export const resumeSummary =
-  "Technical support specialist working on Full Swing simulator systems through Auxillium. I troubleshoot remote issues across calibration, licensing, display, networking, Windows, and connected hardware, often with incomplete logs and no direct hardware access. Outside work, I build web and audio tools to understand systems better and make useful things I would like to see exist, including mmaitland.dev, StringFlux, and Research Radar.";
+  "Robotics Technician at Barn Owl Precision with a background in layered technical support, Windows and various Linux systems, networking, connected hardware, and software projects. Previously, I supported complex simulator systems. Outside work, I build web software, audio DSP tools, music, and research prototypes around things I want to understand, including mmaitland.dev, StringFlux, NEUROCHEMICAL ENTROPY, and Research Radar.";
 
 export const resumeSkillTiers: ResumeSkillTier[] = [
   {
@@ -40,6 +40,8 @@ export const resumeSkillTiers: ResumeSkillTier[] = [
     title: "Core Skills",
     skills: [
       "Troubleshooting",
+      "Robotics systems",
+      "Systems diagnostics",
       "Windows systems",
       "Networking / TCP/IP",
       "TypeScript",
@@ -74,11 +76,26 @@ export const resumeSkillTiers: ResumeSkillTier[] = [
 
 export const resumeExperience: ResumeExperienceItem[] = [
   {
+    role: "Robotics Technician",
+    company: "Barn Owl Precision",
+    period: "Current",
+    description:
+      "Hands-on robotics technician role supporting robotic systems that need to operate accurately and consistently in dust, heat, and day-to-day use.",
+    highlights: [
+      {
+        text: "Bring layer-by-layer troubleshooting habits from simulator support into robotics work, with emphasis on observation, isolation, and repeatable fixes.",
+      },
+      {
+        text: "Apply hardware, Windows, networking, and diagnostic experience in a hands-on equipment context.",
+      },
+    ],
+  },
+  {
     role: "Independent Software and Audio Development",
     company: "Self-directed",
     period: "2022 - Present",
     description:
-      "Self-directed web and audio software built around things I wanted to understand better or tools I wanted to use, maintained around full-time work with public notes on scope, decisions, and limits.",
+      "Self-directed web software, audio DSP, and music work built around things I wanted to understand better or tools I wanted to use, maintained around full-time work with public notes on scope, decisions, and limits.",
     highlights: [
       {
         text: "Built mmaitland.dev with typed content, CI, smoke tests, contact validation, rate limiting, and optional admin workflows.",
@@ -95,17 +112,17 @@ export const resumeExperience: ResumeExperienceItem[] = [
   },
   {
     role: "Technical Support / Product Support Specialist",
-    company: "Auxillium (technical support for Full Swing)",
-    period: "April 2024 - Present",
+    company: "Auxillium",
+    period: "April 2024 - 2026",
     description:
-      "Diagnose remote simulator issues across calibration, licensing, display, networking, OS, and peripheral layers in customer production environments.",
+      "Supported complex simulator systems remotely, often with incomplete logs and limited direct hardware access.",
     highlights: [
       {
-        text: "Built repeatable triage notes for recurring failure patterns so similar tickets start from the right isolation steps instead of from scratch.",
+        text: "Built repeatable triage notes for recurring failure patterns so similar tickets started from the right isolation steps instead of from scratch.",
         href: "/projects/full-swing-tech-support",
       },
       {
-        text: "Support Full Swing-first environments with Laser Shot and E6 Golf from TruGolf often present on the same install.",
+        text: "Worked through customer-facing simulator issues by isolating symptoms, testing likely causes, and documenting repeatable fixes.",
       },
     ],
   },

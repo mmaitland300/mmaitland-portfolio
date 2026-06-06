@@ -61,7 +61,7 @@ describe("projects data integrity", () => {
     }
   });
 
-  it("leads the homepage with practical tooling and support anchors", () => {
+  it("leads the homepage with practical tooling and support case-study anchors", () => {
     expect(getHomepageFeaturedProjects().map((p) => p.slug)).toEqual([
       "smart-project-backup",
       "full-swing-tech-support",
@@ -79,6 +79,7 @@ describe("projects data integrity", () => {
       "live-prototype",
       "live-demo",
       "current-role",
+      "prior-role",
       "source-installable",
       "desktop-prototype",
       "shipped",
@@ -142,7 +143,7 @@ describe("projects data integrity", () => {
     expect(site).toBeDefined();
     expect(site?.status).toBe("live-site");
     expect(support).toBeDefined();
-    expect(support?.status).toBe("current-role");
+    expect(support?.status).toBe("prior-role");
   });
 
   it("includes Smart Project Backup as a source-installable milestone", () => {

@@ -8,7 +8,7 @@ import { buttonVariants } from "@/components/ui/button-variants";
 export function Hero() {
   const reduceMotion = useReducedMotion();
   const fade = {
-    initial: { opacity: reduceMotion ? 1 : 0, y: reduceMotion ? 0 : 24 },
+    initial: false as const,
     animate: { opacity: 1, y: 0 },
   };
   const fadeTrans = (delay: number) => ({
@@ -26,7 +26,7 @@ export function Hero() {
         >
           <div className="accent-pill mb-6 inline-flex items-center gap-3 rounded-full px-4 py-2 text-xs font-medium uppercase tracking-[0.24em] text-muted-foreground/90 backdrop-blur-sm">
             <span className="accent-pill-dot shrink-0" />
-            Technical Support - Practical Web Software - Audio Tools
+            Robotics Systems - Web Software - Audio DSP
           </div>
         </motion.div>
 
@@ -44,9 +44,9 @@ export function Hero() {
           transition={fadeTrans(0.12)}
           className="mt-5 mx-auto max-w-4xl text-2xl font-semibold leading-tight text-foreground/95 sm:text-3xl"
         >
-          I work in technical support for complex simulator systems, then use
-          the same troubleshooting habits to build web apps, audio tools, and
-          research prototypes.
+          I work hands-on with robotics systems, and I build web software,
+          audio DSP tools, music, and research prototypes around things I want
+          to understand.
         </motion.h2>
 
         <motion.p
@@ -54,12 +54,10 @@ export function Hero() {
           transition={fadeTrans(0.16)}
           className="mt-6 mx-auto max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg"
         >
-          I currently work with Auxillium supporting Full Swing software and
-          simulator technology, where hardware, software, networking, Windows
-          behavior, calibration, and customer constraints often overlap. Outside
-          of work I build web apps, audio tools, and research prototypes. This
-          site collects the projects, notes, and music that come out of that
-          overlap.
+          I currently work as a Robotics Technician at Barn Owl Precision.
+          Before that, I supported complex simulator systems. Outside of work I
+          build web software, audio DSP tools, music, and research prototypes.
+          This site collects the projects and notes that come out of that work.
         </motion.p>
 
         <motion.div
