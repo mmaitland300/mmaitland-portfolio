@@ -54,7 +54,7 @@ export function Hero() {
           className="mt-6 mx-auto max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg"
         >
           I currently work as a Robotics Technician at Barn Owl Precision.
-          Before that, I supported complex simulator systems. Outside of work I
+          Before that, I supported complex golf simulator systems. Outside of work I
           build web software and audio DSP tools, write and produce music, and
           work on research prototypes. This site collects those projects,
           notes, and music.
