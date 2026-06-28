@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
-import matter from "gray-matter";
 import readingTime from "reading-time";
+import { parse as parseYaml } from "yaml";
 import { parseDateValue } from "@/lib/date";
 
 const CONTENT_DIR = path.join(process.cwd(), "src/content/blog");
@@ -46,6 +46,23 @@ export interface TocEntry {
 
 function toStringArray(value: unknown): string[] {
   return Array.isArray(value) ? value.filter((x): x is string => typeof x === "string") : [];
+}
+
+function parseMdxFrontmatter(raw: string, slug: string) {
+  const match = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?/.exec(raw);
+  if (!match) {
+    return { data: {}, content: raw };
+  }
+
+  const [, frontmatterBlock] = match;
+  try {
+    return {
+      data: parseYaml(frontmatterBlock) ?? {},
+      content: raw.slice(match[0].length),
+    };
+  } catch (error) {
+    throw new Error(`${slug}: invalid frontmatter YAML`, { cause: error });
+  }
 }
 
 function parseFrontmatter(rawData: unknown, slug: string): BlogFrontmatter {
@@ -98,7 +115,7 @@ export function getAllPosts(): BlogPost[] {
       const slug = file.replace(/\.mdx$/, "");
       const filePath = path.join(CONTENT_DIR, file);
       const raw = fs.readFileSync(filePath, "utf-8");
-      const { data, content } = matter(raw);
+      const { data, content } = parseMdxFrontmatter(raw, slug);
       const frontmatter = parseFrontmatter(data, slug);
 
       return {
@@ -123,7 +140,7 @@ export function getPostBySlug(slug: string): BlogPost | null {
   if (!fs.existsSync(filePath)) return null;
 
   const raw = fs.readFileSync(filePath, "utf-8");
-  const { data, content } = matter(raw);
+  const { data, content } = parseMdxFrontmatter(raw, slug);
   const frontmatter = parseFrontmatter(data, slug);
 
   if (!frontmatter.published) return null;
