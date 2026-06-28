@@ -3,6 +3,10 @@ import { unstable_rethrow } from "next/navigation";
 import { MessageSquare } from "lucide-react";
 import { parseAppEnv } from "@/lib/env";
 import { isAdminAuthConfigured } from "@/lib/feature-config";
+import {
+  isPrismaConnectionUnavailable,
+  logOptionalDatabaseUnavailableOnce,
+} from "@/lib/optional-database";
 import { getSessionUser } from "@/lib/session";
 import { isAdmin } from "@/lib/admin";
 import { CommentForm } from "@/components/sections/comment-form";
@@ -19,21 +23,6 @@ function isProjectCommentTableMissing(error: unknown) {
     error.code === "P2021" &&
     (error.meta?.modelName === "ProjectComment" ||
       String(error.message).includes("ProjectComment"))
-  );
-}
-
-function isPrismaConnectionUnavailable(error: unknown) {
-  if (error instanceof Prisma.PrismaClientInitializationError) {
-    return true;
-  }
-
-  if (!(error instanceof Error)) {
-    return false;
-  }
-
-  return (
-    error.message.includes("Can't reach database server") ||
-    error.message.includes("ECONNREFUSED")
   );
 }
 
@@ -91,16 +80,12 @@ export async function ProjectComments({
         );
       }
     } else if (isPrismaConnectionUnavailable(error)) {
-      const message =
-        "ProjectComments: database unavailable; comments are disabled for this request.";
-
-      if (process.env.NODE_ENV === "production") {
-        console.error(message);
-      } else {
-        console.warn(
-          `${message} Start Postgres or unset DATABASE_URL to hide the optional comments section locally.`,
-        );
-      }
+      logOptionalDatabaseUnavailableOnce(
+        "ProjectComments",
+        process.env.NODE_ENV === "production"
+          ? "comments are disabled for this process."
+          : "comments are disabled for this process. Start Postgres or unset DATABASE_URL to hide the optional comments section locally.",
+      );
     } else {
       console.error("ProjectComments: failed to load comments", error);
     }

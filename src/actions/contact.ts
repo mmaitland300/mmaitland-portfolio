@@ -6,6 +6,10 @@ import { Redis } from "@upstash/redis";
 import { headers } from "next/headers";
 import { contactSchema } from "./contact.contract";
 import { getContactDeliveryEnv, hasUpstashRedisEnv, parseAppEnv } from "@/lib/env";
+import {
+  isPrismaConnectionUnavailable,
+  logOptionalDatabaseUnavailableOnce,
+} from "@/lib/optional-database";
 
 export type ContactState =
   | { success: true; message: string }
@@ -114,7 +118,14 @@ export async function submitContact(
         },
       });
     } catch (err) {
-      console.error("Admin inbox persistence failed (best-effort):", err);
+      if (isPrismaConnectionUnavailable(err)) {
+        logOptionalDatabaseUnavailableOnce(
+          "Admin inbox persistence",
+          "email delivery succeeded, but this submission was not saved to the admin inbox.",
+        );
+      } else {
+        console.error("Admin inbox persistence failed (best-effort):", err);
+      }
     }
   }
 
