@@ -26,9 +26,9 @@ export function ProjectGrid() {
           Featured case studies
         </h2>
         <p className="mt-2 mx-auto max-w-2xl text-sm text-muted-foreground">
-          Larger projects include case studies or notes with the useful parts,
-          tradeoffs, and current limits. Cards here give more context than the
-          homepage preview row.
+          Larger projects have case studies or notes explaining the work, the
+          choices I made, and what I would still like to improve. The cards here
+          include more detail than the homepage.
         </p>
       </div>
 
@@ -101,8 +101,8 @@ export function ProjectGrid() {
               <h2 className="text-2xl font-bold tracking-tight">Experiments</h2>
             </div>
             <p className="mx-auto max-w-md text-sm text-muted-foreground">
-              Interactive experiments and small-scope builds used to explore
-              implementation patterns, runtime behavior, and tradeoffs.
+              Smaller projects where I tried an idea, learned a tool, or worked
+              through a technical problem.
             </p>
           </motion.div>
 

@@ -44,8 +44,8 @@ export function Hero() {
           transition={fadeTrans(0.12)}
           className="mt-5 mx-auto max-w-4xl text-2xl font-semibold leading-tight text-foreground/95 sm:text-3xl"
         >
-          I work hands-on with robotics systems, build web software and audio
-          DSP tools, write and produce music, and work on research prototypes.
+          I work in robotics. Outside of work, I build software and audio tools,
+          and I write and produce music.
         </motion.h2>
 
         <motion.p
@@ -54,10 +54,9 @@ export function Hero() {
           className="mt-6 mx-auto max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg"
         >
           I currently work as a Robotics Technician at Barn Owl Precision.
-          Before that, I supported complex golf simulator systems. Outside of work I
-          build web software and audio DSP tools, write and produce music, and
-          work on research prototypes. This site collects those projects,
-          notes, and music.
+          Before that, I supported complex golf simulator systems. This site is
+          where I share software projects, audio DSP work, research experiments,
+          technical notes, and music.
         </motion.p>
 
         <motion.div
@@ -96,8 +95,8 @@ export function Hero() {
           transition={fadeTrans(0.2)}
           className="mt-4 mx-auto max-w-2xl text-center text-sm leading-relaxed text-muted-foreground sm:text-base"
         >
-          Working style: isolate the layer, make technical state visible, keep
-          fixes reversible, and document limits clearly.{" "}
+          I tend to work methodically: understand the problem, change one thing
+          at a time, and keep notes on what worked and what did not.{" "}
           <Link
             href="/projects"
             className="text-foreground/90 underline-offset-4 hover:underline"
@@ -111,7 +110,7 @@ export function Hero() {
           >
             blog posts
           </Link>
-          {" capture tradeoffs, what I checked, and what is still open."}
+          {" show that process in more detail."}
         </motion.p>
 
         <motion.div

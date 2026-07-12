@@ -13,8 +13,8 @@ export function FeaturedProjects() {
   const featured = getHomepageFeaturedProjects();
   const researchRadarDemoUrl = getResearchRadarDemoUrl();
   const featuredDescription = researchRadarDemoUrl
-    ? "Four project anchors: a practical backup CLI, a prior support case study, a live research prototype, and in-development audio software. The projects page expands the details, links, and limits."
-    : "Four project anchors: a practical backup CLI, a prior support case study, a research prototype, and in-development audio software. The projects page expands the details, links, and limits.";
+    ? "Here are four things I've spent substantial time on: a backup tool, a case study from my previous support role, a live research prototype, and an audio plugin in development. The projects page has the full list."
+    : "Here are four things I've spent substantial time on: a backup tool, a case study from my previous support role, a research prototype, and an audio plugin in development. The projects page has the full list.";
 
   return (
     <section className="py-24 relative z-10">

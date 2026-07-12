@@ -32,7 +32,7 @@ export type ResumeSkillTier = {
 };
 
 export const resumeSummary =
-  "Robotics Technician at Barn Owl Precision with a background in layered technical support, Windows and various Linux systems, networking, connected hardware, and software projects. Previously, I supported complex simulator systems. Outside work, I build web software and audio DSP tools, write and produce music, and work on research prototypes, including mmaitland.dev, StringFlux, NEUROCHEMICAL ENTROPY, and Research Radar.";
+  "Robotics Technician at Barn Owl Precision with experience troubleshooting Windows and Linux systems, networks, connected hardware, and software. Previously, I supported complex simulator systems. Outside work, I build web software and audio DSP tools, write and produce music, and occasionally work on research prototypes. That work includes mmaitland.dev, StringFlux, NEUROCHEMICAL ENTROPY, and Research Radar.";
 
 export const resumeSkillTiers: ResumeSkillTier[] = [
   {
@@ -95,18 +95,18 @@ export const resumeExperience: ResumeExperienceItem[] = [
     company: "Self-directed",
     period: "2022 - Present",
     description:
-      "Self-directed web software and audio DSP projects, plus original music, maintained around full-time work with public notes on scope, decisions, and limits.",
+      "Web software and audio DSP projects developed outside of full-time work, alongside writing, recording, and producing original music.",
     highlights: [
       {
         text: "Built mmaitland.dev with typed content, CI, smoke tests, contact validation, rate limiting, and optional admin workflows.",
         href: "https://www.mmaitland.dev",
       },
       {
-        text: "Building StringFlux in JUCE/C++ with focus on real-time-safe behavior, narrow scope, and documented tradeoffs.",
+        text: "Building StringFlux in JUCE/C++ with a focus on stable real-time audio processing and a deliberately focused feature set.",
         href: "https://www.mmaitland.dev/stringflux",
       },
       {
-        text: "Write case studies and decision notes so project pages explain the decisions, limits, and current state behind the demos and repositories.",
+        text: "Write case studies and project notes that explain what I built, why I made certain choices, and what I would improve next.",
       },
     ],
   },

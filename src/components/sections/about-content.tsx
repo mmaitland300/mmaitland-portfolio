@@ -42,7 +42,7 @@ export function AboutContent({ publicEmail }: AboutContentProps) {
           and the root cause live in different layers. In robotics, past
           support work, web software, and audio DSP,
           the visible failure is often only the first clue: hardware state,
-          environment, operating-system behavior, connectivity, and human
+          environment, operating-system behavior, connectivity, and
           context can all be part of the real cause.
         </p>
         <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
@@ -52,12 +52,9 @@ export function AboutContent({ publicEmail }: AboutContentProps) {
           fixes that cannot be reproduced.
         </p>
         <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
-          Those habits still apply when I work on my own projects: web
-          software, audio DSP tools, and music. I still care about naming real
-          limits: remote
-          diagnosis with incomplete information, Windows and display stack
-          overlap, real-time audio deadline pressure, and small-scope solo
-          maintenance.
+          I use the same approach in my own software and audio DSP projects. I
+          also write and produce music. When I write about my work, I try to be
+          clear about what I tested, what worked, and what still needs work.
         </p>
       </motion.section>
 

@@ -53,10 +53,9 @@ export default function MusicPage() {
             <Music2 className="h-6 w-6 text-[rgba(122,162,247,0.95)]" />
           </div>
           <p className="mx-auto mt-6 max-w-2xl text-center text-sm leading-relaxed text-muted-foreground sm:text-base">
-            These tracks are also part of why I build audio DSP tools: they
-            give me a real production context for judging timing, texture,
-            transient response, arrangement density, and mix behavior instead
-            of evaluating DSP only in abstract test cases.
+            Making music is also what led me to build audio DSP tools. I can
+            try ideas in actual songs and hear whether they help the music or
+            get in the way.
           </p>
         </div>
 
