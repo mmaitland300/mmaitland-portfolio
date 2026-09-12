@@ -38,8 +38,8 @@ export function AboutContent({ publicEmail }: AboutContentProps) {
       <motion.section {...fadeUp}>
         <p className="text-lg font-medium text-foreground leading-relaxed">
           A lot of my work comes down to diagnosing problems where the symptom
-          and the root cause live in different layers. In robotics, past
-          support work, web software, and audio DSP,
+          and the root cause live in different layers. In web software, audio DSP,
+          and my previous robotics technician and support roles,
           the visible failure is often only the first clue: hardware state,
           environment, operating-system behavior, connectivity, and
           context can all be part of the real cause.
