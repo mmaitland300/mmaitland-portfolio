@@ -34,13 +34,13 @@ export type ResumeSkillTier = {
 // Role names confirmed by Matt in September 2026. Add detailed employment
 // entries once the employer, start dates, and publishable scope are confirmed.
 export const professionalIntro =
-  "I work in regional management and as a software engineer with an ML team. My background includes robotics, systems troubleshooting, and technical support.";
+  "I work in regional management and software engineering, contributing to machine learning, the RMF dashboard, and navigation software. My background includes robotics, systems diagnostics, and technical support.";
 
 export const siteDescription =
-  "Regional management, software engineering with an ML team, and a background in robotics. Projects in web software, audio DSP, and original music.";
+  "Regional management and software engineering across machine learning, the RMF dashboard, and navigation. Independent projects in web software, audio DSP, and music.";
 
 export const resumeSummary =
-  "Regional Manager and Software Engineer working with an ML team. Background in robotics, systems diagnostics, and technical support across Windows, Linux, networks, and connected hardware. Independent projects include TypeScript web applications, JUCE/C++ audio tools, and original music.";
+  "Regional Manager and Software Engineer supporting the engineering team's machine learning work and contributing to the RMF dashboard and navigation software. Background in robotics and systems diagnostics. Independent projects include TypeScript web applications, JUCE/C++ audio tools, and original music.";
 
 export const resumeSkillTiers: ResumeSkillTier[] = [
   {

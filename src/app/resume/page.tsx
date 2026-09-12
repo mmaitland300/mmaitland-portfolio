@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/resume" },
   title: "Resume",
   description:
-    "Resume for Matt Maitland: regional management, software engineering with an ML team, robotics and technical support experience, web software, and audio DSP.",
+    "Resume for Matt Maitland: regional management, software engineering across machine learning, the RMF dashboard, and navigation, plus independent web and audio DSP projects.",
 };
 
 export default function ResumePage() {

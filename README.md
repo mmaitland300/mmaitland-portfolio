@@ -170,7 +170,7 @@ Set `published: false` to keep a post as a draft (hidden from listings and direc
 
 **Projects** are defined in `src/content/projects.ts`. Each entry has a `category` of `"featured"` or `"experiment"`.
 
-**Resume data** is centralized in `src/content/resume.ts` and consumed by both the `/about` and `/resume` pages.
+**Edit the resume:** Update the quoted text in `src/content/resume.ts` (`resumeSummary`, `resumeExperience`, skills, and education). These edits also update `/about` and `/resume`. With the latest site running locally, run `npm run resume:pdf`, review `public/resume.pdf`, then run `npm run resume:check`. Commit the source, PDF, and generated manifest together.
 
 **Resume PDF (`public/resume.pdf`):** Treat **`src/content/resume.ts` as source of truth** for resume copy. Regenerate the PDF whenever its source or print layout changes, inspect every page, and commit `public/resume.pdf` together with `scripts/resume-pdf.manifest.json`. `npm run resume:check` runs in CI and rejects changed inputs or an independently replaced PDF. The fingerprint check verifies the recorded source/artifact pair; it does not replace visual review or verify employment facts. Use a local dev server with the latest source, or rebuild before using a production server for PDF generation.
 
