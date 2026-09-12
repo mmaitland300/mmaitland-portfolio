@@ -5,6 +5,7 @@ import { BlogList } from "@/components/sections/blog-list";
 import { SectionHeader } from "@/components/ui/section-header";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/blog" },
   title: "Blog",
   description:
     "Troubleshooting writeups, notes from side projects, and explanations of technical decisions I made along the way.",

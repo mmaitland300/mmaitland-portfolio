@@ -6,6 +6,7 @@ import { Redis } from "@upstash/redis";
 import { headers } from "next/headers";
 import { contactSchema } from "./contact.contract";
 import { getContactDeliveryEnv, hasUpstashRedisEnv, parseAppEnv } from "@/lib/env";
+import { requireAcceptedEmail } from "@/lib/email-delivery";
 import {
   isPrismaConnectionUnavailable,
   logOptionalDatabaseUnavailableOnce,
@@ -60,18 +61,28 @@ export async function submitContact(
     };
   }
 
-  const rl = getRatelimit();
-  if (rl) {
-    const headerStore = await headers();
-    const ip =
-      headerStore.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
-    const { success: allowed } = await rl.limit(ip);
-    if (!allowed) {
-      return {
-        success: false,
-        message: "Too many requests. Please try again in a minute.",
-      };
+  try {
+    const rl = getRatelimit();
+    if (rl) {
+      const headerStore = await headers();
+      const ip =
+        headerStore.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+      const result = await rl.limit(ip);
+      // Upstash allows requests on timeout by default. Keep abuse protection closed.
+      if (result.reason === "timeout") throw new Error("Contact rate limit timed out.");
+      if (!result.success) {
+        return {
+          success: false,
+          message: "Too many requests. Please try again in a minute.",
+        };
+      }
     }
+  } catch (error) {
+    console.error("Contact rate limit unavailable:", error);
+    return {
+      success: false,
+      message: "The contact form is temporarily unavailable. Please try again in a minute or use the email link on this page.",
+    };
   }
 
   const contactDeliveryEnv = getContactDeliveryEnv();
@@ -85,7 +96,7 @@ export async function submitContact(
 
   try {
     const resend = new Resend(contactDeliveryEnv.RESEND_API_KEY);
-    await resend.emails.send({
+    const sendResult = await resend.emails.send({
       from: contactDeliveryEnv.CONTACT_FROM_EMAIL,
       to: contactDeliveryEnv.CONTACT_TO_EMAIL,
       replyTo: parsed.data.email,
@@ -98,6 +109,7 @@ export async function submitContact(
         parsed.data.message,
       ].join("\n"),
     });
+    requireAcceptedEmail(sendResult);
   } catch (err) {
     console.error("Failed to send email:", err);
     return {
@@ -106,7 +118,7 @@ export async function submitContact(
     };
   }
 
-  // Best-effort: email delivery is the success gate
+  // Best-effort: provider acceptance is the success gate, not inbox delivery.
   if (parseAppEnv().DATABASE_URL) {
     try {
       const { prisma } = await import("@/lib/prisma");
@@ -121,7 +133,7 @@ export async function submitContact(
       if (isPrismaConnectionUnavailable(err)) {
         logOptionalDatabaseUnavailableOnce(
           "Admin inbox persistence",
-          "email delivery succeeded, but this submission was not saved to the admin inbox.",
+          "email was accepted, but this submission was not saved to the admin inbox.",
         );
       } else {
         console.error("Admin inbox persistence failed (best-effort):", err);

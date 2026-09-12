@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect, useId, useRef, useState } from "react";
 import { Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { submitComment, type CommentActionResult } from "@/actions/comments";
@@ -19,7 +19,25 @@ export function CommentForm({
   currentPath,
   isSignedIn,
 }: CommentFormProps) {
-  const [state, formAction, isPending] = useActionState(submitComment, initial);
+  const [body, setBody] = useState("");
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const feedbackRef = useRef<HTMLParagraphElement>(null);
+  const fieldId = useId();
+  const feedbackId = `${fieldId}-feedback`;
+  const [state, formAction, isPending] = useActionState(
+    async (previous: CommentActionResult, formData: FormData) => {
+      const result = await submitComment(previous, formData);
+      if (result.success) setBody("");
+      return result;
+    },
+    initial
+  );
+
+  useEffect(() => {
+    if (!state.message) return;
+    if (!state.success && state.errors?.body) textareaRef.current?.focus();
+    else feedbackRef.current?.focus();
+  }, [state]);
 
   if (!isSignedIn) {
     return (
@@ -37,10 +55,23 @@ export function CommentForm({
   }
 
   return (
-    <form action={formAction} className="space-y-3">
+    <form action={formAction} aria-busy={isPending} className="space-y-3">
+      <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">
+        {isPending ? "Posting your comment." : state.success ? state.message : ""}
+      </p>
       <input type="hidden" name="projectSlug" value={projectSlug} />
+      <label htmlFor={fieldId} className="block text-sm font-medium">
+        Your comment
+      </label>
       <textarea
+        ref={textareaRef}
+        id={fieldId}
         name="body"
+        value={body}
+        onChange={(event) => setBody(event.target.value)}
+        aria-invalid={!state.success && Boolean(state.errors?.body)}
+        aria-describedby={!state.success && state.errors?.body ? feedbackId : undefined}
+        readOnly={isPending}
         required
         minLength={3}
         maxLength={2000}
@@ -49,9 +80,9 @@ export function CommentForm({
         className="w-full rounded-lg border border-border bg-card/40 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-brand-violet/40 resize-y"
       />
       {state.success ? (
-        <p className="text-sm text-emerald-400">{state.message}</p>
+        <p ref={feedbackRef} tabIndex={-1} className="text-sm text-emerald-400">{state.message}</p>
       ) : state.message ? (
-        <p className="text-sm text-destructive">
+        <p ref={feedbackRef} id={feedbackId} tabIndex={-1} role="alert" className="text-sm text-destructive">
           {state.errors?.body?.[0] ?? state.message}
         </p>
       ) : null}

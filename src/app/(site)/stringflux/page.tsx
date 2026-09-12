@@ -8,6 +8,7 @@ import { StringFluxPluginPreview } from "@/components/case-studies/stringflux-pl
 import { StringFluxWaitlistForm } from "@/components/sections/stringflux-waitlist-form";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/stringflux" },
   title: "StringFlux",
   description:
     "StringFlux is a transient-aware multiband granular delay and freeze plugin for guitar and other stringed instruments. Signal flow, interface previews, and a waitlist to join for beta access.",

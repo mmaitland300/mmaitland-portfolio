@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Github, Mail, Music2 } from "lucide-react";
 import { getPublicMailtoHref } from "@/lib/site-contact";
 import { siteNavLinks } from "@/lib/site-nav";
+import { siteDescription } from "@/content/resume";
 
 export function Footer() {
   const socialLinks = [
@@ -34,8 +35,7 @@ export function Footer() {
               </span>
             </Link>
             <p className="mt-3 text-sm text-muted-foreground max-w-xs">
-              Robotics technician building web software and audio DSP tools,
-              writing and producing music, and working on research prototypes.
+              {siteDescription}
             </p>
           </div>
 

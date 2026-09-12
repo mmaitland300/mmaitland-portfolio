@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import { MotionProvider } from "@/components/layout/motion-provider";
 import { PAGE_TITLE_GRADIENT } from "@/lib/page-title-gradient";
 import { getSiteUrl } from "@/lib/site-url";
+import { siteDescription } from "@/content/resume";
 import "./globals.css";
 
 const inter = Inter({
@@ -21,11 +22,12 @@ export const metadata: Metadata = {
     default: "Matt Maitland",
     template: "%s | Matt Maitland",
   },
-  description:
-    "Robotics technician building web software and audio DSP tools, writing and producing music, and working on research prototypes. Case studies, blog, and contact.",
+  description: siteDescription,
   keywords: [
     "Matt Maitland",
-    "robotics technician",
+    "software engineer",
+    "regional management",
+    "robotics",
     "Barn Owl Precision",
     "technical support",
     "Full Swing",

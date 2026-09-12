@@ -28,39 +28,37 @@ export function AdminComposeForm() {
     setFeedback(null);
     setErrors({});
 
-    startTransition(() => {
-      void (async () => {
-        try {
-          const result = await sendComposeEmail({
-            toEmail,
-            toName: toName.trim() || undefined,
-            subject,
-            body,
-          });
+    startTransition(async () => {
+      try {
+        const result = await sendComposeEmail({
+          toEmail,
+          toName: toName.trim() || undefined,
+          subject,
+          body,
+        });
 
-          if (result.errors) {
-            setErrors(result.errors);
-          }
-
-          setFeedback({
-            success: result.success,
-            message: result.message,
-            warning: result.warning,
-          });
-
-          if (result.success) {
-            setToEmail("");
-            setToName("");
-            setSubject("");
-            setBody("");
-          }
-        } catch {
-          setFeedback({
-            success: false,
-            message: "Could not send the email right now. Please try again.",
-          });
+        if (result.errors) {
+          setErrors(result.errors);
         }
-      })();
+
+        setFeedback({
+          success: result.success,
+          message: result.message,
+          warning: result.warning,
+        });
+
+        if (result.success) {
+          setToEmail("");
+          setToName("");
+          setSubject("");
+          setBody("");
+        }
+      } catch {
+        setFeedback({
+          success: false,
+          message: "Could not send the email right now. Please try again.",
+        });
+      }
     });
   }
 

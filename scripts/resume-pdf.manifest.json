@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "sources": {
+    "src/content/resume.ts": "c8be7be9e05b330d30950aef11de22232a9ae1a0ed96edacdb6fd7e57d78c940",
+    "src/components/resume/resume-document.tsx": "f627d722a84fa150092ab1526218f1a64b39cf56c1daf25cdab4af1ea618f7cd",
+    "src/app/resume/print/page.tsx": "98295df985d61efe567f956fdccdd349dd36fdf7d83d20693e3c55352c574d39",
+    "src/app/resume/print/layout.tsx": "cbc85d434ac467185422ca6c4270f11d299373e3c69eaef788fbaffe0e1a464e",
+    "src/app/globals.css": "df1f5e2fa40642bd7a9c9ca768ce9acf1375801052ec3039fa0b32a83e44c22c",
+    "src/lib/site-contact.ts": "9235b25fcf86189a47c5542f2495fca58cf23569b1b7f5af3c7a7700c9b70b2a",
+    "src/lib/site-url.ts": "7f200d94859716f98d0a81390ec0c4d1e71b606adf5713d9c4bf9e16ba7d8ba7",
+    "scripts/generate-resume-pdf.mjs": "9440e4cee0a4185c8b7901f54f094dafa07b00764c5af015f371992d1a9f3ad7",
+    "scripts/resume-pdf-manifest.mjs": "c1a414b7cb39a96998ee0b4e7ca0431dd017a32525bb500a32466fe0517934ab"
+  },
+  "pdf": "83acd53985b5a4f60f1af4f28af5f9740295a8ef04c2fda5024896c9ec97b202"
+}

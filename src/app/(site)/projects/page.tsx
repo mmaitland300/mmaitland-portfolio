@@ -4,6 +4,7 @@ import { ProjectGrid } from "@/components/sections/project-grid";
 import { SectionHeader } from "@/components/ui/section-header";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/projects" },
   title: "Projects",
   description:
     "Projects grouped by what they are, why I built them, what works now, and what is still limited.",

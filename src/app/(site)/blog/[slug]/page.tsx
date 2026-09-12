@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MainContentAnchor } from "@/components/layout/main-content-anchor";
 import Link from "next/link";
-import { MDXRemote } from "next-mdx-remote/rsc";
+import { compileMDX } from "next-mdx-remote/rsc";
 import rehypeSlug from "rehype-slug";
 import rehypePrettyCode from "rehype-pretty-code";
 import remarkGfm from "remark-gfm";
@@ -10,7 +10,7 @@ import { Calendar, Clock, ArrowLeft } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { TableOfContents } from "@/components/sections/table-of-contents";
 import { formatDisplayDate } from "@/lib/date";
-import { getAllPosts, getPostBySlug, extractToc } from "@/lib/mdx";
+import { getAllPosts, getPostBySlug, createTocPlugin, type TocEntry } from "@/lib/mdx";
 import { mdxComponents } from "@/lib/mdx-components";
 
 interface BlogPostPageProps {
@@ -30,10 +30,12 @@ export async function generateMetadata({
   if (!post) return {};
 
   return {
+    alternates: { canonical: `/blog/${slug}` },
     title: post.frontmatter.title,
     description: post.frontmatter.description,
     keywords: post.frontmatter.tags,
     openGraph: {
+      url: `/blog/${slug}`,
       title: post.frontmatter.title,
       description: post.frontmatter.description,
       type: "article",
@@ -48,7 +50,21 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
-  const toc = extractToc(post.content);
+  const toc: TocEntry[] = [];
+  const { content } = await compileMDX({
+    source: post.content,
+    components: mdxComponents,
+    options: {
+      mdxOptions: {
+        remarkPlugins: [remarkGfm],
+        rehypePlugins: [
+          rehypeSlug,
+          createTocPlugin(toc),
+          [rehypePrettyCode, { theme: "github-dark-default", keepBackground: true }],
+        ],
+      },
+    },
+  });
 
   return (
     <div className="py-32">
@@ -94,25 +110,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </header>
 
             <div className="prose-custom">
-              <MDXRemote
-                source={post.content}
-                components={mdxComponents}
-                options={{
-                  mdxOptions: {
-                    remarkPlugins: [remarkGfm],
-                    rehypePlugins: [
-                      rehypeSlug,
-                      [
-                        rehypePrettyCode,
-                        {
-                          theme: "github-dark-default",
-                          keepBackground: true,
-                        },
-                      ],
-                    ],
-                  },
-                }}
-              />
+              {content}
             </div>
           </article>
 

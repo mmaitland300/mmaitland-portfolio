@@ -97,7 +97,7 @@ export function ResumeDocument({
           </p>
         </header>
 
-        <section className="mt-5 break-inside-avoid">
+        <section className="mt-5">
           <h2 className="border-b border-neutral-400 pb-0.5 text-[10pt] font-bold uppercase tracking-wider text-neutral-900">
             Experience
           </h2>
@@ -187,7 +187,7 @@ export function ResumeDocument({
 
         <section className="mt-5 break-inside-avoid">
           <h2 className="border-b border-neutral-400 pb-0.5 text-[10pt] font-bold uppercase tracking-wider text-neutral-900">
-            Certifications
+            Certification History
           </h2>
           <div className="mt-3 space-y-3">
             {resumeCertifications.map((item) => (
@@ -338,7 +338,7 @@ export function ResumeDocument({
       </section>
 
       <section className="mt-10">
-        <h2 className="text-xl font-semibold">Certifications</h2>
+        <h2 className="text-xl font-semibold">Certification History</h2>
         <div className="mt-5 space-y-5">
           {resumeCertifications.map((item) => (
             <article key={item.name}>

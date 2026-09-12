@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button-variants";
 import {
+  professionalIntro,
   resumeSkillTiers,
   resumeExperience as experience,
   resumeEducation as education,
@@ -46,8 +47,7 @@ export function AboutContent({ publicEmail }: AboutContentProps) {
           context can all be part of the real cause.
         </p>
         <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
-          I currently do that as a Robotics Technician at Barn Owl Precision.
-          Before that, I supported complex simulator systems. That support work
+          {professionalIntro} Supporting complex simulator systems
           taught me to work from observation, isolate variables, and distrust
           fixes that cannot be reproduced.
         </p>
@@ -186,7 +186,7 @@ export function AboutContent({ publicEmail }: AboutContentProps) {
           <div className="p-2 rounded-lg bg-emerald-500/10">
             <ShieldCheck className="h-5 w-5 text-emerald-400" />
           </div>
-          <h2 className="text-2xl font-bold">Certifications</h2>
+          <h2 className="text-2xl font-bold">Certification History</h2>
         </div>
         <div className="space-y-6">
           {certifications.map((cert) => (

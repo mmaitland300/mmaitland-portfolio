@@ -151,6 +151,7 @@ const lessonsLearned =
   "Building the explanation layer early turned out to matter more than I expected. Once each run stored why it ranked the way it did, comparing versions became straightforward instead of guesswork. Keeping bridge visible as a separate experimental view also helped: the core flow stayed focused, and I could work on the experimental side without it polluting the main results. The evaluation page earned its place too. I kept expecting a single summary score to be enough, and it never was. Seeing the full comparison grid against simple sorts was always more honest.";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/projects/research-radar" },
   title: "Research Radar: Explainable Discovery Prototype",
   description:
     "Case study for Research Radar, a working prototype for MIR and audio ML: emerging and undercited rankings, bridge experiments, similarity, trends, and evaluation.",

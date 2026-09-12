@@ -31,8 +31,16 @@ export type ResumeSkillTier = {
   skills: string[];
 };
 
+// Role names confirmed by Matt in September 2026. Add detailed employment
+// entries once the employer, start dates, and publishable scope are confirmed.
+export const professionalIntro =
+  "I work in regional management and as a software engineer with an ML team. My background includes robotics, systems troubleshooting, and technical support.";
+
+export const siteDescription =
+  "Regional management, software engineering with an ML team, and a background in robotics. Projects in web software, audio DSP, and original music.";
+
 export const resumeSummary =
-  "Robotics Technician at Barn Owl Precision with experience troubleshooting Windows and Linux systems, networks, connected hardware, and software. Previously, I supported complex simulator systems. Outside work, I build web software and audio DSP tools, write and produce music, and occasionally work on research prototypes. That work includes mmaitland.dev, StringFlux, NEUROCHEMICAL ENTROPY, and Research Radar.";
+  "Regional Manager and Software Engineer working with an ML team, with a background in robotics, systems diagnostics, and technical support. Experience troubleshooting Windows and Linux systems, networks, connected hardware, and software. Independent work includes TypeScript web applications, JUCE/C++ audio tools, and original music.";
 
 export const resumeSkillTiers: ResumeSkillTier[] = [
   {
@@ -78,7 +86,7 @@ export const resumeExperience: ResumeExperienceItem[] = [
   {
     role: "Robotics Technician",
     company: "Barn Owl Precision",
-    period: "Current",
+    period: "Earlier experience",
     description:
       "Hands-on robotics technician role supporting robotic systems that need to operate accurately and consistently in dust, heat, and day-to-day use.",
     highlights: [

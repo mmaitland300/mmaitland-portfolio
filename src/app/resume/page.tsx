@@ -4,9 +4,10 @@ import { ResumeDocument } from "@/components/resume/resume-document";
 import { getPublicContactEmail } from "@/lib/site-contact";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/resume" },
   title: "Resume",
   description:
-    "Resume for Matt Maitland: Robotics Technician at Barn Owl Precision, prior support for complex simulator systems, and self-directed web software, audio DSP, and music.",
+    "Resume for Matt Maitland: regional management, software engineering with an ML team, robotics and technical support experience, web software, and audio DSP.",
 };
 
 export default function ResumePage() {

@@ -17,8 +17,18 @@ test.describe("skip link", () => {
 
     const target = page.locator("#main-content");
     await expect(target).toBeFocused();
-    await expect
-      .poll(() => page.evaluate(() => window.scrollY))
-      .toBeGreaterThan(80);
+    const heading = page.getByRole("heading", { level: 1 });
+    await expect(heading).toBeInViewport();
+    expect(await target.evaluate((anchor) => {
+      const heading = document.querySelector("h1");
+      return Boolean(
+        heading &&
+        (anchor.compareDocumentPosition(heading) & Node.DOCUMENT_POSITION_FOLLOWING)
+      );
+    })).toBe(true);
+
+    // The first tab after the skip target should reach the introduction's CTA.
+    await page.keyboard.press("Tab");
+    await expect(page.locator("main a").first()).toBeFocused();
   });
 });

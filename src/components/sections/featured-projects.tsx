@@ -7,17 +7,14 @@ import { buttonVariants } from "@/components/ui/button-variants";
 import { ProjectCard } from "@/components/sections/project-card";
 import { SectionHeader } from "@/components/ui/section-header";
 import { getHomepageFeaturedProjects } from "@/content/projects";
-import { getResearchRadarDemoUrl } from "@/lib/research-radar";
 
 export function FeaturedProjects() {
   const featured = getHomepageFeaturedProjects();
-  const researchRadarDemoUrl = getResearchRadarDemoUrl();
-  const featuredDescription = researchRadarDemoUrl
-    ? "Here are four things I've spent substantial time on: a backup tool, a case study from my previous support role, a live research prototype, and an audio plugin in development. The projects page has the full list."
-    : "Here are four things I've spent substantial time on: a backup tool, a case study from my previous support role, a research prototype, and an audio plugin in development. The projects page has the full list.";
+  const featuredDescription =
+    "Software, systems troubleshooting, research, and audio DSP. Each project explains the work and the decisions behind it.";
 
   return (
-    <section className="py-24 relative z-10">
+    <section className="py-14 sm:py-20 relative z-10">
       <div className="mx-auto max-w-6xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

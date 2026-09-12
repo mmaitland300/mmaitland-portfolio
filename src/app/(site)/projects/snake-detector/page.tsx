@@ -19,6 +19,7 @@ import { getProjectBySlug } from "@/content/projects";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/projects/snake-detector" },
   title: "Snake Detector: Narrow CV Demo",
   description:
     "A snake vs no-snake demo with a reproducible training workflow, explicit limits, and saved evaluation artifacts. Scope stops short of species ID or field wildlife workflows.",

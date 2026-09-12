@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import {
   Mail,
@@ -80,7 +80,7 @@ function ReplyStatusBadges({
           ok
         )}
       >
-        Delivered
+        Accepted for sending
       </span>
       <span
         className={cn(
@@ -117,13 +117,6 @@ export function InboxList({
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
-  useEffect(() => {
-    setReplyingToId(null);
-    setReplySubject("");
-    setReplyBody("");
-    setReplyErrors({});
-  }, [mode, submissions.length]);
-
   function runInboxAction(
     id: string,
     action: (submissionId: string) => Promise<{ success: boolean; message: string }>
@@ -131,34 +124,32 @@ export function InboxList({
     setPendingId(id);
     setFeedback(null);
 
-    startTransition(() => {
-      void (async () => {
-        try {
-          const result = await action(id);
-          setFeedback({
-            success: result.success,
-            message: result.message,
-          });
+    startTransition(async () => {
+      try {
+        const result = await action(id);
+        setFeedback({
+          success: result.success,
+          message: result.message,
+        });
 
-          if (result.success) {
-            if (replyingToId === id) {
-              setReplyingToId(null);
-              setReplySubject("");
-              setReplyBody("");
-              setReplyErrors({});
-            }
-            router.refresh();
+        if (result.success) {
+          if (replyingToId === id) {
+            setReplyingToId(null);
+            setReplySubject("");
+            setReplyBody("");
+            setReplyErrors({});
           }
-        } catch {
-          setFeedback({
-            success: false,
-            message:
-              "Could not update this message right now. Please try again in a moment.",
-          });
-        } finally {
-          setPendingId(null);
+          router.refresh();
         }
-      })();
+      } catch {
+        setFeedback({
+          success: false,
+          message:
+            "Could not update this message right now. Please try again in a moment.",
+        });
+      } finally {
+        setPendingId(null);
+      }
     });
   }
 
@@ -183,48 +174,46 @@ export function InboxList({
     setFeedback(null);
     setReplyErrors({});
 
-    startTransition(() => {
-      void (async () => {
-        try {
-          const result = await replyToSubmission({
-            submissionId,
-            subject: replySubject,
-            body: replyBody,
-          });
+    startTransition(async () => {
+      try {
+        const result = await replyToSubmission({
+          submissionId,
+          subject: replySubject,
+          body: replyBody,
+        });
 
-          if (result.errors) {
-            setReplyErrors(result.errors);
-          }
-
-          setFeedback({
-            success: result.success,
-            message: result.message,
-            warning: result.warning,
-            replyDelivery:
-              result.success
-                ? {
-                    historySaved: result.historySaved,
-                    markedRead: result.markedRead,
-                  }
-                : undefined,
-          });
-
-          if (result.success) {
-            setReplyingToId(null);
-            setReplySubject("");
-            setReplyBody("");
-            setReplyErrors({});
-            router.refresh();
-          }
-        } catch {
-          setFeedback({
-            success: false,
-            message: "Could not send the reply right now. Please try again.",
-          });
-        } finally {
-          setPendingId(null);
+        if (result.errors) {
+          setReplyErrors(result.errors);
         }
-      })();
+
+        setFeedback({
+          success: result.success,
+          message: result.message,
+          warning: result.warning,
+          replyDelivery:
+            result.success
+              ? {
+                  historySaved: result.historySaved,
+                  markedRead: result.markedRead,
+                }
+              : undefined,
+        });
+
+        if (result.success) {
+          setReplyingToId(null);
+          setReplySubject("");
+          setReplyBody("");
+          setReplyErrors({});
+          router.refresh();
+        }
+      } catch {
+        setFeedback({
+          success: false,
+          message: "Could not send the reply right now. Please try again.",
+        });
+      } finally {
+        setPendingId(null);
+      }
     });
   }
 
@@ -363,7 +352,7 @@ export function InboxList({
                         id={`reply-subject-${sub.id}`}
                         value={replySubject}
                         onChange={(event) => setReplySubject(event.target.value)}
-                        disabled={isSubmissionPending}
+                        disabled={isPending}
                       />
                       {replyErrors.subject?.[0] ? (
                         <p className="text-xs text-destructive">{replyErrors.subject[0]}</p>
@@ -376,7 +365,7 @@ export function InboxList({
                         value={replyBody}
                         onChange={(event) => setReplyBody(event.target.value)}
                         rows={6}
-                        disabled={isSubmissionPending}
+                        disabled={isPending}
                       />
                       {replyErrors.body?.[0] ? (
                         <p className="text-xs text-destructive">{replyErrors.body[0]}</p>
@@ -385,7 +374,7 @@ export function InboxList({
                     <div className="flex items-center gap-2">
                       <Button
                         size="sm"
-                        disabled={isSubmissionPending}
+                        disabled={isPending}
                         onClick={() => sendReply(sub.id)}
                       >
                         <Send size={14} className="mr-1.5" />
@@ -394,7 +383,7 @@ export function InboxList({
                       <Button
                         variant="ghost"
                         size="sm"
-                        disabled={isSubmissionPending}
+                        disabled={isPending}
                         onClick={() => {
                           setReplyingToId(null);
                           setReplySubject("");
@@ -413,7 +402,7 @@ export function InboxList({
                     <Button
                       variant="ghost"
                       size="sm"
-                      disabled={isSubmissionPending}
+                      disabled={isPending}
                       onClick={() => runInboxAction(sub.id, markAsUnread)}
                     >
                       <Mail size={14} className="mr-1.5" /> Mark unread
@@ -422,7 +411,7 @@ export function InboxList({
                     <Button
                       variant="ghost"
                       size="sm"
-                      disabled={isSubmissionPending}
+                      disabled={isPending}
                       onClick={() => runInboxAction(sub.id, markAsRead)}
                     >
                       <MailOpen size={14} className="mr-1.5" /> Mark read
@@ -432,7 +421,7 @@ export function InboxList({
                     <Button
                       variant="ghost"
                       size="sm"
-                      disabled={isSubmissionPending}
+                      disabled={isPending}
                       onClick={() => runInboxAction(sub.id, unarchiveSubmission)}
                     >
                       <ArchiveRestore size={14} className="mr-1.5" /> Restore
@@ -441,7 +430,7 @@ export function InboxList({
                     <Button
                       variant="ghost"
                       size="sm"
-                      disabled={isSubmissionPending}
+                      disabled={isPending}
                       onClick={() => runInboxAction(sub.id, archiveSubmission)}
                     >
                       <Archive size={14} className="mr-1.5" /> Archive
@@ -450,7 +439,7 @@ export function InboxList({
                   <Button
                     variant="ghost"
                     size="sm"
-                    disabled={isSubmissionPending}
+                    disabled={isPending}
                     onClick={() => startReply(sub)}
                     className="ml-auto"
                   >

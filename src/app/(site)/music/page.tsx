@@ -5,6 +5,7 @@ import { LazySoundCloudTrack } from "@/components/sections/lazy-soundcloud-track
 import { SectionHeader } from "@/components/ui/section-header";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/music" },
   title: "Music",
   description:
     "Original music by Matt Maitland - written, recorded, produced, and mastered as NEUROCHEMICAL ENTROPY. Listen on SoundCloud.",

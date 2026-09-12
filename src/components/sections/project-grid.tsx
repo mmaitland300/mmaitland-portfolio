@@ -1,23 +1,14 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { Beaker } from "lucide-react";
 import { ProjectCard } from "@/components/sections/project-card";
 import { Separator } from "@/components/ui/separator";
 import { getExperiments, getFeaturedProjects } from "@/content/projects";
-import { cn } from "@/lib/utils";
 
 export function ProjectGrid() {
   const featured = getFeaturedProjects();
   const experiments = getExperiments();
-
-  const allTags = Array.from(new Set(featured.flatMap((p) => p.tags))).sort();
-  const [activeTag, setActiveTag] = useState<string | null>(null);
-
-  const filtered = activeTag
-    ? featured.filter((p) => p.tags.includes(activeTag))
-    : featured;
 
   return (
     <div>
@@ -26,64 +17,17 @@ export function ProjectGrid() {
           Featured case studies
         </h2>
         <p className="mt-2 mx-auto max-w-2xl text-sm text-muted-foreground">
-          Larger projects have case studies or notes explaining the work, the
-          choices I made, and what I would still like to improve. The cards here
-          include more detail than the homepage.
+          Explore the problem, the work, and the decisions behind each project.
         </p>
       </div>
 
       <div
-        role="group"
-        aria-label="Filter projects by tag"
-        className="mb-10 flex flex-wrap justify-center gap-2"
-      >
-        <button
-          type="button"
-          aria-pressed={activeTag === null}
-          aria-controls="project-grid-filter-results"
-          onClick={() => setActiveTag(null)}
-          className={cn(
-            "rounded-md px-3 py-1.5 text-xs font-medium transition-colors",
-            !activeTag
-              ? "border border-brand-violet/30 bg-brand-violet/20 text-brand-violet"
-              : "bg-muted text-muted-foreground hover:text-foreground"
-          )}
-        >
-          All
-        </button>
-        {allTags.map((tag) => (
-          <button
-            key={tag}
-            type="button"
-            aria-pressed={activeTag === tag}
-            aria-controls="project-grid-filter-results"
-            onClick={() => setActiveTag(tag === activeTag ? null : tag)}
-            className={cn(
-              "rounded-md px-3 py-1.5 text-xs font-medium transition-colors",
-              tag === activeTag
-                ? "border border-brand-violet/30 bg-brand-violet/20 text-brand-violet"
-                : "bg-muted text-muted-foreground hover:text-foreground"
-            )}
-          >
-            {tag}
-          </button>
-        ))}
-      </div>
-
-      <div
-        id="project-grid-filter-results"
         className="grid grid-cols-1 gap-6 md:grid-cols-2"
       >
-        {filtered.map((project, i) => (
+        {featured.map((project, i) => (
           <ProjectCard key={project.slug} project={project} index={i} />
         ))}
       </div>
-
-      {filtered.length === 0 && (
-        <p className="py-12 text-center text-muted-foreground">
-          No projects match that filter.
-        </p>
-      )}
 
       {experiments.length > 0 && (
         <>

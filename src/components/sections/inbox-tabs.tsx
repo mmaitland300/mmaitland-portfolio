@@ -85,6 +85,7 @@ export function InboxTabs({
       ) : (
         <>
           <InboxList
+            key={`${currentTab}-${currentPage}`}
             submissions={submissions}
             sentEmailsBySubmissionId={sentEmailsBySubmissionId}
             mode={currentTab}

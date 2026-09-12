@@ -6,6 +6,7 @@ import { chromium } from "playwright";
 import { mkdir } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { recordResumePdf } from "./resume-pdf-manifest.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
@@ -67,7 +68,8 @@ async function main() {
     await browser.close();
   }
 
-  console.log(`Wrote ${outPath}`);
+  await recordResumePdf();
+  console.log(`Wrote ${outPath} and recorded source/PDF fingerprints`);
 }
 
 main().catch((err) => {

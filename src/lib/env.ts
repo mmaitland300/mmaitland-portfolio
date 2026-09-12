@@ -49,34 +49,35 @@ export type AppEnv = z.infer<typeof appEnvSchema>;
 export type AdminAuthEnv = z.infer<typeof adminAuthEnvSchema>;
 export type ContactDeliveryEnv = z.infer<typeof contactDeliveryEnvSchema>;
 export type ResendSenderEnv = z.infer<typeof resendSenderEnvSchema>;
+export type EnvironmentValues = Readonly<Record<string, string | undefined>>;
 
-export function parseAppEnv(env: NodeJS.ProcessEnv = process.env): AppEnv {
+export function parseAppEnv(env: EnvironmentValues = process.env): AppEnv {
   return appEnvSchema.parse(env);
 }
 
 export function isWaitlistEnvConfigured(
-  env: NodeJS.ProcessEnv = process.env
+  env: EnvironmentValues = process.env
 ): boolean {
   const parsed = parseAppEnv(env);
   return Boolean(parsed.DATABASE_URL);
 }
 
 export function isAdminAuthEnvConfigured(
-  env: NodeJS.ProcessEnv = process.env
+  env: EnvironmentValues = process.env
 ): boolean {
   const parsed = parseAppEnv(env);
   return adminAuthEnvSchema.safeParse(parsed).success;
 }
 
 export function getAdminAuthEnv(
-  env: NodeJS.ProcessEnv = process.env
+  env: EnvironmentValues = process.env
 ): AdminAuthEnv {
   const parsed = parseAppEnv(env);
   return adminAuthEnvSchema.parse(parsed);
 }
 
 export function getContactDeliveryEnv(
-  env: NodeJS.ProcessEnv = process.env
+  env: EnvironmentValues = process.env
 ): ContactDeliveryEnv | null {
   const parsed = parseAppEnv(env);
   const result = contactDeliveryEnvSchema.safeParse(parsed);
@@ -84,7 +85,7 @@ export function getContactDeliveryEnv(
 }
 
 export function getResendSenderEnv(
-  env: NodeJS.ProcessEnv = process.env
+  env: EnvironmentValues = process.env
 ): ResendSenderEnv | null {
   const parsed = parseAppEnv(env);
   const result = resendSenderEnvSchema.safeParse(parsed);
@@ -92,14 +93,14 @@ export function getResendSenderEnv(
 }
 
 export function hasUpstashRedisEnv(
-  env: NodeJS.ProcessEnv = process.env
+  env: EnvironmentValues = process.env
 ): boolean {
   const parsed = parseAppEnv(env);
   return Boolean(parsed.UPSTASH_REDIS_REST_URL && parsed.UPSTASH_REDIS_REST_TOKEN);
 }
 
 export function getAdminGithubIds(
-  env: NodeJS.ProcessEnv = process.env
+  env: EnvironmentValues = process.env
 ): string[] {
   const parsed = parseAppEnv(env);
   if (!parsed.ADMIN_GITHUB_IDS) {
