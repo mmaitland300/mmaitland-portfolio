@@ -108,10 +108,12 @@ export function ResumeDocument({
               >
                 <div className="flex flex-col gap-0.5 sm:flex-row sm:items-start sm:justify-between">
                   <div>
-                    <h3 className="text-[11pt] font-semibold text-neutral-950">
+                    <h3 className="text-[11pt] font-bold text-black">
                       {item.role}
                     </h3>
-                    <p className="text-[10pt] text-neutral-700">{item.company}</p>
+                    {item.company ? (
+                      <p className="text-[10pt] text-neutral-700">{item.company}</p>
+                    ) : null}
                   </div>
                   <p className="text-[10pt] text-neutral-600 sm:shrink-0 sm:text-right">
                     {item.period}
@@ -246,8 +248,10 @@ export function ResumeDocument({
             >
               <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
                 <div>
-                  <h3 className="font-semibold text-foreground">{item.role}</h3>
-                  <p className="text-sm text-brand-violet">{item.company}</p>
+                  <h3 className="font-bold text-foreground">{item.role}</h3>
+                  {item.company ? (
+                    <p className="text-sm text-brand-violet">{item.company}</p>
+                  ) : null}
                 </div>
                 <p className="text-sm text-muted-foreground">{item.period}</p>
               </div>

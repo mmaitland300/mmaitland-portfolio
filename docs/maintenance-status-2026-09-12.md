@@ -1,6 +1,6 @@
 # September 2026 maintenance status
 
-This branch addresses the main findings from [the site review](site-review-2026-09-12.md). Production deployment remains pending.
+This update addresses the main findings from [the site review](site-review-2026-09-12.md). Published September 13, 2026 in [PR #39](https://github.com/mmaitland300/mmaitland-portfolio/pull/39).
 
 ## Completed
 
@@ -12,11 +12,13 @@ This branch addresses the main findings from [the site review](site-review-2026-
 
 ## Information needed
 
-The owner confirmed regional management and software engineering work supporting machine learning within the engineering team, the RMF dashboard, and navigation. No private employment documents are included here. Detailed employment entries still need:
+Public introductions use "software developer." Keep individual work projects out of introductory copy.
 
-- Employer, official title, and start month for each role; whether the roles overlap.
+The owner confirmed a Regional Manager title with a focus on software development and some management duties. Development work includes the RMF dashboard, navigation, and contributions to machine learning within the engineering team. No private employment documents are included here. Detailed employment entries still need:
+
+- Employer, start month, and role chronology.
 - The end date or continuing scope of Robotics Technician work, and Auxillium's end month.
-- Two or three publishable achievements per new role, including responsibilities, technology, and outcomes.
+- Two or three publishable achievements for the current role, including responsibilities, technology, and outcomes.
 
 ## Deployment and follow-up
 

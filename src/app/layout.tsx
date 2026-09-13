@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   keywords: [
     "Matt Maitland",
     "software engineer",
-    "regional management",
+    "software development",
     "robotics",
     "Barn Owl Precision",
     "technical support",
