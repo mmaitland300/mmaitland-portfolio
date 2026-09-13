@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     "software engineer",
     "software development",
     "robotics",
-    "Barn Owl Precision",
+    "Barn Owl Precision Agriculture",
     "technical support",
     "Full Swing",
     "web software",
