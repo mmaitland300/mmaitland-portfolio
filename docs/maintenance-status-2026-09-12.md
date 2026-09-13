@@ -16,7 +16,7 @@ Public introductions use "software developer." Keep individual work projects out
 
 Keep PRs and coding updates concise. Public site copy can include music, personal context, and a fuller narrative where they serve the page.
 
-The offer letter confirms Regional Manager at BOPA Precision Agriculture, Inc., starting August 11, 2026. Its scope includes Colorado deployments and customer support, engineering coordination, and ML/CV work. Matt also confirmed software development contributions. Describe these responsibilities without making management secondary. No private employment documents are included here. Remaining details:
+The offer letter confirms Regional Manager starting August 11, 2026. Matt confirmed that this role and Robotics Technician are at the same company, Barn Owl Precision Agriculture (BOPA). The role's scope includes Colorado deployments and customer support, engineering coordination, and ML/CV work. Matt also confirmed software development contributions. Describe these responsibilities without making management secondary. No private employment documents are included here. Remaining details:
 
 - The end date or continuing scope of Robotics Technician work, and Auxillium's end month.
 - Two or three publishable achievements for the current role, including responsibilities, technology, and outcomes.

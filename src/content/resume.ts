@@ -85,14 +85,14 @@ export const resumeSkillTiers: ResumeSkillTier[] = [
 export const resumeExperience: ResumeExperienceItem[] = [
   {
     role: "Regional Manager",
-    company: "BOPA Precision Agriculture, Inc.",
+    company: "Barn Owl Precision Agriculture (BOPA)",
     period: "August 2026 - Present",
     description:
       "Manage Colorado deployments and customer support, coordinate with engineering, and contribute to software development and machine learning.",
   },
   {
     role: "Robotics Technician",
-    company: "Barn Owl Precision",
+    company: "Barn Owl Precision Agriculture (BOPA)",
     period: "Earlier experience",
     description:
       "Supported robotic systems operating in dust, heat, and daily field use.",
