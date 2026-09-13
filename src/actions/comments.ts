@@ -68,15 +68,24 @@ export async function submitComment(
     return { success: false, message: "Comments are not enabled for this project." };
   }
 
-  const rl = getCommentRatelimit();
-  if (rl) {
-    const { success: allowed } = await rl.limit(userId);
-    if (!allowed) {
-      return {
-        success: false,
-        message: "Too many comments. Please wait a minute.",
-      };
+  try {
+    const rl = getCommentRatelimit();
+    if (rl) {
+      const result = await rl.limit(userId);
+      if (result.reason === "timeout") throw new Error("Comment rate limit timed out.");
+      if (!result.success) {
+        return {
+          success: false,
+          message: "Too many comments. Please wait a minute.",
+        };
+      }
     }
+  } catch (error) {
+    console.error("Comment rate limit unavailable:", error);
+    return {
+      success: false,
+      message: "Comments are temporarily unavailable. Please try again in a minute.",
+    };
   }
 
   try {
@@ -88,8 +97,6 @@ export async function submitComment(
       },
     });
 
-    revalidatePath(`/projects/${parsed.data.projectSlug}`);
-    return { success: true, message: "Comment posted." };
   } catch (error) {
     console.error("Failed to save comment:", error);
     return {
@@ -97,6 +104,14 @@ export async function submitComment(
       message: "Could not save your comment. Please try again.",
     };
   }
+
+  try {
+    revalidatePath(`/projects/${parsed.data.projectSlug}`);
+  } catch (error) {
+    console.error("Comment saved but page refresh failed:", error);
+    return { success: true, message: "Comment posted. Refresh the page to see it." };
+  }
+  return { success: true, message: "Comment posted." };
 }
 
 export async function hideComment(

@@ -2,7 +2,6 @@ import { FileDown, Github, Mail, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   contactInfo,
-  resumeCertifications,
   resumeEducation,
   resumeExperience,
   resumeSkillTiers,
@@ -65,14 +64,14 @@ export function ResumeDocument({
   if (variant === "print") {
     return (
       <div
-        className="resume-print-document mx-auto max-w-[8.5in] px-10 py-8 text-[11pt] leading-snug text-neutral-900"
+        className="resume-print-document mx-auto max-w-[8.5in] px-2 text-[11pt] leading-snug text-neutral-900"
         data-resume-print-ready
       >
-        <header className="border-b border-neutral-300 pb-4">
+        <header className="border-b border-neutral-300 pb-3">
           <h1 className="text-[22pt] font-bold tracking-tight text-neutral-950">
             {contactInfo.name}
           </h1>
-          <p className="mt-2 max-w-[6.5in] text-[10pt] leading-normal text-neutral-700">
+          <p className="mt-2 max-w-[6.5in] text-[10pt] leading-snug text-neutral-700">
             {resumeSummary}
           </p>
           <p className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-[9pt] text-neutral-800">
@@ -97,15 +96,15 @@ export function ResumeDocument({
           </p>
         </header>
 
-        <section className="mt-5 break-inside-avoid">
+        <section className="mt-4">
           <h2 className="border-b border-neutral-400 pb-0.5 text-[10pt] font-bold uppercase tracking-wider text-neutral-900">
             Experience
           </h2>
-          <div className="mt-3 space-y-4">
+          <div className="mt-2 space-y-3">
             {resumeExperience.map((item) => (
               <article
                 key={`${item.role}-${item.company}-print`}
-                className="break-inside-avoid border-b border-neutral-200 pb-3 last:border-b-0"
+                className="break-inside-avoid border-b border-neutral-200 pb-2 last:border-b-0"
               >
                 <div className="flex flex-col gap-0.5 sm:flex-row sm:items-start sm:justify-between">
                   <div>
@@ -118,11 +117,11 @@ export function ResumeDocument({
                     {item.period}
                   </p>
                 </div>
-                <p className="mt-2 text-[10pt] leading-normal text-neutral-800">
+                <p className="mt-1 text-[10pt] leading-snug text-neutral-800">
                   {item.description}
                 </p>
                 {item.highlights && item.highlights.length > 0 ? (
-                  <ul className="mt-2 list-disc space-y-0.5 pl-4 text-[10pt] text-neutral-800">
+                  <ul className="mt-1 list-disc space-y-0.5 pl-4 text-[10pt] text-neutral-800">
                     {item.highlights.map((highlight, index) => (
                       <li key={`${highlight.text}-${index}`}>
                         <ResumeHighlightLine
@@ -139,17 +138,17 @@ export function ResumeDocument({
           </div>
         </section>
 
-        <section className="mt-5 break-inside-avoid">
+        <section className="mt-4 break-inside-avoid">
           <h2 className="border-b border-neutral-400 pb-0.5 text-[10pt] font-bold uppercase tracking-wider text-neutral-900">
             Skills
           </h2>
-          <div className="mt-3 space-y-2">
+          <div className="mt-2 space-y-2">
             {resumeSkillTiers.map((tier) => (
               <div key={tier.id}>
                 <p className="text-[10pt] font-semibold text-neutral-900">
                   {tier.title}
                 </p>
-                <p className="text-[10pt] leading-normal text-neutral-800">
+                <p className="text-[10pt] leading-snug text-neutral-800">
                   {tier.skills.join(", ")}
                 </p>
               </div>
@@ -157,11 +156,11 @@ export function ResumeDocument({
           </div>
         </section>
 
-        <section className="mt-5 break-inside-avoid">
+        <section className="mt-4 break-inside-avoid">
           <h2 className="border-b border-neutral-400 pb-0.5 text-[10pt] font-bold uppercase tracking-wider text-neutral-900">
             Education
           </h2>
-          <div className="mt-3 space-y-3">
+          <div className="mt-2 space-y-2">
             {resumeEducation.map((item) => (
               <article key={`${item.degree}-${item.school}`}>
                 <div className="flex flex-col gap-0.5 sm:flex-row sm:items-start sm:justify-between">
@@ -176,7 +175,7 @@ export function ResumeDocument({
                   </p>
                 </div>
                 {item.description ? (
-                  <p className="mt-1 text-[10pt] leading-normal text-neutral-800">
+                  <p className="mt-1 text-[10pt] leading-snug text-neutral-800">
                     {item.description}
                   </p>
                 ) : null}
@@ -185,28 +184,6 @@ export function ResumeDocument({
           </div>
         </section>
 
-        <section className="mt-5 break-inside-avoid">
-          <h2 className="border-b border-neutral-400 pb-0.5 text-[10pt] font-bold uppercase tracking-wider text-neutral-900">
-            Certifications
-          </h2>
-          <div className="mt-3 space-y-3">
-            {resumeCertifications.map((item) => (
-              <article key={item.name}>
-                <div className="flex flex-col gap-0.5 sm:flex-row sm:items-start sm:justify-between">
-                  <h3 className="text-[11pt] font-semibold text-neutral-950">
-                    {item.name}
-                  </h3>
-                  <p className="text-[10pt] text-neutral-600 sm:shrink-0 sm:text-right">
-                    {item.period}
-                  </p>
-                </div>
-                <p className="mt-1 text-[10pt] leading-normal text-neutral-800">
-                  {item.description}
-                </p>
-              </article>
-            ))}
-          </div>
-        </section>
       </div>
     );
   }
@@ -337,22 +314,6 @@ export function ResumeDocument({
         </div>
       </section>
 
-      <section className="mt-10">
-        <h2 className="text-xl font-semibold">Certifications</h2>
-        <div className="mt-5 space-y-5">
-          {resumeCertifications.map((item) => (
-            <article key={item.name}>
-              <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
-                <h3 className="font-semibold text-foreground">{item.name}</h3>
-                <p className="text-sm text-muted-foreground">{item.period}</p>
-              </div>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                {item.description}
-              </p>
-            </article>
-          ))}
-        </div>
-      </section>
     </div>
   );
 }

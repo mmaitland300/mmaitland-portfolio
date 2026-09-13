@@ -7,6 +7,7 @@ import { isAdmin } from "@/lib/admin";
 import { getContactDeliveryEnv } from "@/lib/env";
 import { prisma } from "@/lib/prisma";
 import { normalizeReplySubject } from "@/lib/email-subject";
+import { requireAcceptedEmail } from "@/lib/email-delivery";
 import {
   replyToSubmissionSchema,
   sendComposeEmailSchema,
@@ -51,6 +52,16 @@ function failedResult(
   };
 }
 
+function refreshAdminEmailViews(): string | undefined {
+  try {
+    revalidatePath("/admin/inbox");
+    revalidatePath("/admin/sent");
+  } catch (error) {
+    console.error("Email accepted but admin page refresh failed:", error);
+    return "Admin pages could not be refreshed. Reload to see the latest state.";
+  }
+}
+
 async function requireAdminUserId(): Promise<string | AdminEmailActionResult> {
   const authorized = await isAdmin();
   if (!authorized) {
@@ -63,18 +74,6 @@ async function requireAdminUserId(): Promise<string | AdminEmailActionResult> {
   }
 
   return session.user.id;
-}
-
-function getResendMessageId(result: unknown): string | null {
-  if (!result || typeof result !== "object") return null;
-  if (!("data" in result)) return null;
-
-  const data = (result as { data?: unknown }).data;
-  if (!data || typeof data !== "object") return null;
-  if (!("id" in data)) return null;
-
-  const id = (data as { id?: unknown }).id;
-  return typeof id === "string" && id.length > 0 ? id : null;
 }
 
 export async function replyToSubmission(
@@ -98,10 +97,16 @@ export async function replyToSubmission(
     return failedResult("Email delivery is not configured.");
   }
 
-  const submission = await prisma.contactSubmission.findUnique({
-    where: { id: parsed.data.submissionId },
-    select: { id: true, email: true },
-  });
+  let submission: { id: string; email: string } | null;
+  try {
+    submission = await prisma.contactSubmission.findUnique({
+      where: { id: parsed.data.submissionId },
+      select: { id: true, email: true },
+    });
+  } catch (error) {
+    console.error("Failed to load the message for a reply:", error);
+    return failedResult("Could not load that message. Please try again.");
+  }
 
   if (!submission) {
     return failedResult("That message no longer exists.");
@@ -119,7 +124,7 @@ export async function replyToSubmission(
       text: parsed.data.body,
     });
 
-    const resendMessageId = getResendMessageId(sendResult);
+    const resendMessageId = requireAcceptedEmail(sendResult);
     let historySaved = false;
     let markedRead = false;
     const warnings: string[] = [];
@@ -134,12 +139,12 @@ export async function replyToSubmission(
           body: parsed.data.body,
           fromEmail: env.CONTACT_FROM_EMAIL,
           replyToEmail: env.CONTACT_TO_EMAIL,
-          resendMessageId: resendMessageId ?? undefined,
+          resendMessageId,
         },
       });
       historySaved = true;
     } catch (error) {
-      console.error("Reply delivered but SentEmail save failed:", error);
+      console.error("Reply accepted but SentEmail save failed:", error);
       warnings.push("Sent history could not be saved.");
     }
 
@@ -150,12 +155,12 @@ export async function replyToSubmission(
       });
       markedRead = true;
     } catch (error) {
-      console.error("Reply delivered but read flag update failed:", error);
+      console.error("Reply accepted but read flag update failed:", error);
       warnings.push("The message could not be marked as read.");
     }
 
-    revalidatePath("/admin/inbox");
-    revalidatePath("/admin/sent");
+    const refreshWarning = refreshAdminEmailViews();
+    if (refreshWarning) warnings.push(refreshWarning);
 
     return {
       success: true,
@@ -204,8 +209,9 @@ export async function sendComposeEmail(
       text: parsed.data.body,
     });
 
-    const resendMessageId = getResendMessageId(sendResult);
+    const resendMessageId = requireAcceptedEmail(sendResult);
     let historySaved = false;
+    const warnings: string[] = [];
 
     try {
       await prisma.sentEmail.create({
@@ -217,25 +223,22 @@ export async function sendComposeEmail(
           body: parsed.data.body,
           fromEmail: env.CONTACT_FROM_EMAIL,
           replyToEmail: env.CONTACT_TO_EMAIL,
-          resendMessageId: resendMessageId ?? undefined,
+          resendMessageId,
         },
       });
       historySaved = true;
     } catch (error) {
-      console.error("Compose delivered but SentEmail save failed:", error);
+      console.error("Compose accepted but SentEmail save failed:", error);
+      warnings.push("Sent history could not be saved.");
     }
 
-    revalidatePath("/admin/sent");
-    revalidatePath("/admin/inbox");
+    const refreshWarning = refreshAdminEmailViews();
+    if (refreshWarning) warnings.push(refreshWarning);
 
     return {
       success: true,
-      message: historySaved
-        ? "Email sent successfully."
-        : "Email sent, but Sent history could not be saved.",
-      warning: historySaved
-        ? undefined
-        : "Sent history could not be saved. Check logs for details.",
+      message: warnings.length > 0 ? "Email sent with warnings." : "Email sent successfully.",
+      warning: warnings.length > 0 ? warnings.join(" ") : undefined,
       historySaved,
       markedRead: false,
     };

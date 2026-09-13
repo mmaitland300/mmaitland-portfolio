@@ -11,14 +11,13 @@ import {
   Github,
   FileDown,
   Mail,
-  ShieldCheck,
 } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button-variants";
 import {
+  professionalIntro,
   resumeSkillTiers,
   resumeExperience as experience,
   resumeEducation as education,
-  resumeCertifications as certifications,
 } from "@/content/resume";
 import { HighlightText } from "@/components/ui/highlight-text";
 
@@ -39,15 +38,14 @@ export function AboutContent({ publicEmail }: AboutContentProps) {
       <motion.section {...fadeUp}>
         <p className="text-lg font-medium text-foreground leading-relaxed">
           A lot of my work comes down to diagnosing problems where the symptom
-          and the root cause live in different layers. In robotics, past
-          support work, web software, and audio DSP,
+          and the root cause live in different layers. In web software, audio DSP,
+          and my previous robotics technician and support roles,
           the visible failure is often only the first clue: hardware state,
           environment, operating-system behavior, connectivity, and
           context can all be part of the real cause.
         </p>
         <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
-          I currently do that as a Robotics Technician at Barn Owl Precision.
-          Before that, I supported complex simulator systems. That support work
+          {professionalIntro} Supporting complex simulator systems
           taught me to work from observation, isolate variables, and distrust
           fixes that cannot be reproduced.
         </p>
@@ -181,31 +179,6 @@ export function AboutContent({ publicEmail }: AboutContentProps) {
         </div>
       </motion.section>
 
-      <motion.section {...fadeUp}>
-        <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 rounded-lg bg-emerald-500/10">
-            <ShieldCheck className="h-5 w-5 text-emerald-400" />
-          </div>
-          <h2 className="text-2xl font-bold">Certifications</h2>
-        </div>
-        <div className="space-y-6">
-          {certifications.map((cert) => (
-            <div
-              key={cert.name}
-              className="relative pl-6 border-l-2 border-border"
-            >
-              <div className="absolute -left-[7px] top-1.5 w-3 h-3 rounded-full bg-emerald-500 border-2 border-background" />
-              <h3 className="font-semibold text-foreground">{cert.name}</h3>
-              <p className="text-xs text-muted-foreground mt-0.5">
-                {cert.period}
-              </p>
-              <p className="text-sm text-muted-foreground mt-2">
-                {cert.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </motion.section>
 
       <Separator className="bg-border" />
 

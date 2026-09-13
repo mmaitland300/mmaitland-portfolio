@@ -15,6 +15,7 @@ import { getProjectBySlug } from "@/content/projects";
 const TRIAGE_ARTIFACT_SRC = "/images/projects/full-swing-triage-artifact.svg";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/projects/full-swing-tech-support" },
   title: "Full Swing Technical Support Case Study",
   description:
     "Troubleshooting case study from prior support work with complex simulator systems. Triage, failure isolation, and tradeoffs.",

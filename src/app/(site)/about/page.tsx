@@ -3,11 +3,12 @@ import { MainContentAnchor } from "@/components/layout/main-content-anchor";
 import { AboutContent } from "@/components/sections/about-content";
 import { SectionHeader } from "@/components/ui/section-header";
 import { getPublicContactEmail } from "@/lib/site-contact";
+import { professionalIntro, siteDescription } from "@/content/resume";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/about" },
   title: "About",
-  description:
-    "Robotics technician building web software and audio DSP tools, writing and producing music, and working on research prototypes. Current role is Robotics Technician at Barn Owl Precision; earlier work included supporting complex simulator systems.",
+  description: siteDescription,
 };
 
 export default function AboutPage() {
@@ -17,8 +18,8 @@ export default function AboutPage() {
       <div className="mx-auto max-w-4xl px-6">
         <SectionHeader
           eyebrow="About"
-          title="Robotics technician, web software, and audio DSP"
-          description="Current role is Robotics Technician at Barn Owl Precision. Earlier work included supporting complex simulator systems. Outside of that I build web software and audio DSP tools, write and produce music, and work on research prototypes. The troubleshooting habits carry across all of it."
+          title="Software, robotics, and audio DSP"
+          description={professionalIntro}
           className="mb-16"
         />
         <AboutContent publicEmail={getPublicContactEmail()} />

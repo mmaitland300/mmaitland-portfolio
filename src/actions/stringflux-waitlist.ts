@@ -5,7 +5,8 @@ import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
 import { headers } from "next/headers";
 import { isWaitlistConfigured } from "@/lib/feature-config";
-import { getResendSenderEnv, hasUpstashRedisEnv, parseAppEnv } from "@/lib/env";
+import { getContactDeliveryEnv, hasUpstashRedisEnv } from "@/lib/env";
+import { requireAcceptedEmail } from "@/lib/email-delivery";
 import {
   normalizeWaitlistEmail,
   waitlistSchema,
@@ -62,32 +63,46 @@ export async function joinWaitlist(
     };
   }
 
-  const rl = getRatelimit();
-  if (rl) {
-    const headerStore = await headers();
-    const ip =
-      headerStore.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
-    const { success: allowed } = await rl.limit(ip);
-    if (!allowed) {
-      return {
-        success: false,
-        message: "Too many requests. Please try again in a minute.",
-      };
+  try {
+    const rl = getRatelimit();
+    if (rl) {
+      const headerStore = await headers();
+      const ip =
+        headerStore.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+      const result = await rl.limit(ip);
+      if (result.reason === "timeout") throw new Error("Waitlist rate limit timed out.");
+      if (!result.success) {
+        return {
+          success: false,
+          message: "Too many requests. Please try again in a minute.",
+        };
+      }
     }
+  } catch (error) {
+    console.error("Waitlist rate limit unavailable:", error);
+    return {
+      success: false,
+      message: "The waitlist is temporarily unavailable. Please try again in a minute.",
+    };
   }
 
-  // Persist signup. upsert is intentional: duplicate email is a no-op, not an error.
+  const successResult: WaitlistState = {
+    success: true,
+    message: "You're on the list. I'll reach out when it's ready.",
+  };
+
+  // Atomic conflict handling: only the request that inserts the row sends notices.
   try {
     const { prisma } = await import("@/lib/prisma");
-    await prisma.stringFluxWaitlist.upsert({
-      where: { email: normalizedEmail },
-      update: {},
-      create: {
+    const { count } = await prisma.stringFluxWaitlist.createMany({
+      skipDuplicates: true,
+      data: {
         email: normalizedEmail,
         source: "stringflux-page",
         interest: parsed.data.interest ?? null,
       },
     });
+    if (count === 0) return successResult;
   } catch (err) {
     console.error("StringFlux waitlist persistence failed:", err);
     return {
@@ -96,42 +111,38 @@ export async function joinWaitlist(
     };
   }
 
-  // Best-effort notifications
-  const resendSenderEnv = getResendSenderEnv();
-  const contactToEmail = parseAppEnv().CONTACT_TO_EMAIL;
-  if (resendSenderEnv) {
-    const resend = new Resend(resendSenderEnv.RESEND_API_KEY);
+  // Notifications are best-effort after persistence. Require a reply address for removal requests.
+  const deliveryEnv = getContactDeliveryEnv();
+  if (deliveryEnv) {
+    const resend = new Resend(deliveryEnv.RESEND_API_KEY);
 
-    if (contactToEmail) {
-      try {
-        await resend.emails.send({
-          from: resendSenderEnv.CONTACT_FROM_EMAIL,
-          to: contactToEmail,
-          subject: `StringFlux Waitlist Signup: ${normalizedEmail}`,
-          text: [
-            `A new StringFlux waitlist signup was received.`,
-            ``,
-            `Email: ${normalizedEmail}`,
-            `Interest: ${parsed.data.interest ?? "(not provided)"}`,
-            `Source: stringflux-page`,
-          ].join("\n"),
-        });
-      } catch (err) {
-        console.error(
-          "StringFlux waitlist owner notification failed (best-effort):",
-          err
-        );
-      }
-    } else {
-      console.warn(
-        "CONTACT_TO_EMAIL is not configured; owner notifications for StringFlux waitlist are disabled."
+    try {
+      const sendResult = await resend.emails.send({
+        from: deliveryEnv.CONTACT_FROM_EMAIL,
+        to: deliveryEnv.CONTACT_TO_EMAIL,
+        replyTo: normalizedEmail,
+        subject: `StringFlux Waitlist Signup: ${normalizedEmail}`,
+        text: [
+          `A new StringFlux waitlist signup was received.`,
+          ``,
+          `Email: ${normalizedEmail}`,
+          `Interest: ${parsed.data.interest ?? "(not provided)"}`,
+          `Source: stringflux-page`,
+        ].join("\n"),
+      });
+      requireAcceptedEmail(sendResult);
+    } catch (err) {
+      console.error(
+        "StringFlux waitlist owner notification failed (best-effort):",
+        err
       );
     }
 
     try {
-      await resend.emails.send({
-        from: resendSenderEnv.CONTACT_FROM_EMAIL,
+      const sendResult = await resend.emails.send({
+        from: deliveryEnv.CONTACT_FROM_EMAIL,
         to: normalizedEmail,
+        replyTo: deliveryEnv.CONTACT_TO_EMAIL,
         subject: "You're on the StringFlux waitlist",
         text: [
           `Hey,`,
@@ -143,16 +154,16 @@ export async function joinWaitlist(
           `- Matt`,
         ].join("\n"),
       });
+      requireAcceptedEmail(sendResult);
     } catch (err) {
       console.error(
         "StringFlux waitlist confirmation email failed (best-effort):",
         err
       );
     }
+  } else {
+    console.warn("StringFlux waitlist notifications are disabled until Resend and CONTACT_TO_EMAIL are configured.");
   }
 
-  return {
-    success: true,
-    message: "You're on the list. I'll reach out when it's ready.",
-  };
+  return successResult;
 }

@@ -3,6 +3,8 @@ import path from "path";
 import readingTime from "reading-time";
 import { parse as parseYaml } from "yaml";
 import { parseDateValue } from "@/lib/date";
+import type { Nodes, Root } from "hast";
+import { toString } from "hast-util-to-string";
 
 const CONTENT_DIR = path.join(process.cwd(), "src/content/blog");
 
@@ -160,20 +162,27 @@ export function getAllTags(): BlogCoreTag[] {
   return Array.from(tags).sort();
 }
 
-export function extractToc(content: string): TocEntry[] {
-  const headingRegex = /^(#{2,4})\s+(.+)$/gm;
-  const entries: TocEntry[] = [];
-  let match;
+/** Collect the rendered heading IDs. Run this plugin immediately after rehype-slug. */
+export function createTocPlugin(entries: TocEntry[]) {
+  return function rehypeTableOfContents() {
+    return function (tree: Root) {
+      entries.length = 0;
 
-  while ((match = headingRegex.exec(content)) !== null) {
-    const depth = match[1].length;
-    const text = match[2].trim();
-    const id = text
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/(^-|-$)/g, "");
-    entries.push({ id, text, depth });
-  }
+      function visit(node: Nodes) {
+        if (node.type === "element" && /^h[2-4]$/.test(node.tagName)) {
+          const id = node.properties.id;
+          if (typeof id === "string") {
+            entries.push({
+              id,
+              text: toString(node),
+              depth: Number(node.tagName.slice(1)),
+            });
+          }
+        }
+        if ("children" in node) node.children.forEach(visit);
+      }
 
-  return entries;
+      visit(tree);
+    };
+  };
 }

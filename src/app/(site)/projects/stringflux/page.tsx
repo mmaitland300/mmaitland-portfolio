@@ -18,6 +18,7 @@ import { ProjectComments } from "@/components/sections/project-comments";
 import { getProjectBySlug } from "@/content/projects";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/projects/stringflux" },
   title: "StringFlux DSP Case Study",
   description:
     "A technical deep-dive on StringFlux: transient-aware multiband granular delay architecture, limits, and implementation tradeoffs.",

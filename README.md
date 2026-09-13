@@ -65,7 +65,7 @@ Open [http://localhost:3000](http://localhost:3000).
 - Auth.js v5 is pinned to a specific `next-auth` beta because this repo uses the App Router integration path.
 - Database persistence for contact/admin inbox runs after successful email delivery and is best-effort.
 - Operator-relevant failures use `console.error`; there is no bundled Sentry or APM.
-- `public/resume.pdf` may lag `src/content/resume.ts`; regenerate it in a focused change when the downloadable PDF needs to match.
+- Keep `public/resume.pdf` synchronized with `src/content/resume.ts`; CI checks the recorded source and PDF fingerprints.
 
 ## Tech Stack
 
@@ -121,7 +121,7 @@ The site works without a database. To enable the admin inbox and contact persist
 
 1. Create a [Neon](https://neon.tech) PostgreSQL database.
 2. Replace the Prisma placeholders in `.env` with your Neon pooled (`DATABASE_URL`) and direct (`DIRECT_URL`) URLs.
-3. Apply the schema: `npx prisma migrate deploy` (uses `prisma/migrations`). For a throwaway local database you can use `npx prisma db push` instead.
+3. For a new, empty database, apply the schema with `npm run db:migrate:deploy` (uses `prisma/migrations`). For an existing database, first follow the [baseline adoption and recovery guide](docs/database-recovery.md); the new baseline must be reconciled with its schema and migration history before deployment.
 
 For hosted environments that use migration history, apply pending migrations during deploy or release with `npm run db:migrate:deploy` against your real database (not part of `npm run build`).
 
@@ -170,9 +170,9 @@ Set `published: false` to keep a post as a draft (hidden from listings and direc
 
 **Projects** are defined in `src/content/projects.ts`. Each entry has a `category` of `"featured"` or `"experiment"`.
 
-**Resume data** is centralized in `src/content/resume.ts` and consumed by both the `/about` and `/resume` pages.
+**Edit the resume:** Update the quoted text in `src/content/resume.ts` (`resumeSummary`, `resumeExperience`, skills, and education). These edits also update `/about` and `/resume`. With the latest site running locally, run `npm run resume:pdf`, review `public/resume.pdf`, then run `npm run resume:check`. Commit the source, PDF, and generated manifest together.
 
-**Resume PDF (`public/resume.pdf`):** The file served at `/resume.pdf` may lag `resume.ts`. Treat **`src/content/resume.ts` as source of truth** for resume copy; regenerate the PDF in a dedicated change when you want the download to match.
+**Resume PDF (`public/resume.pdf`):** Treat **`src/content/resume.ts` as source of truth** for resume copy. Regenerate the PDF whenever its source or print layout changes, inspect every page, and commit `public/resume.pdf` together with `scripts/resume-pdf.manifest.json`. `npm run resume:check` runs in CI and rejects changed inputs or an independently replaced PDF. The fingerprint check verifies the recorded source/artifact pair; it does not replace visual review or verify employment facts. Use a local dev server with the latest source, or rebuild before using a production server for PDF generation.
 
 **Regenerate the PDF (automated):** With the site running locally (for example `npm run dev` on port 3000), run `npm run resume:pdf`. That uses Playwright to print the **print-first** route **`/resume/print`** (no site nav/footer; light layout) to `public/resume.pdf`. Override the origin with `RESUME_PDF_ORIGIN` if you use another host or port (for example `RESUME_PDF_ORIGIN=http://127.0.0.1:3001 npm run resume:pdf`).
 
@@ -189,6 +189,7 @@ Set `published: false` to keep a post as a draft (hidden from listings and direc
 | `npm run lint` | Run ESLint |
 | `npm test` | Run unit and data-integrity tests (Vitest) |
 | `npm run resume:pdf` | Print `/resume/print` to `public/resume.pdf` (needs local server; see Content Management) |
+| `npm run resume:check` | Verify the PDF and its recorded source fingerprints match |
 
 ## License
 

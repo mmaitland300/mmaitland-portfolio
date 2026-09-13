@@ -31,8 +31,16 @@ export type ResumeSkillTier = {
   skills: string[];
 };
 
+// Role names confirmed by Matt in September 2026. Add detailed employment
+// entries once the employer, start dates, and publishable scope are confirmed.
+export const professionalIntro =
+  "I work in regional management and software engineering, contributing to machine learning, the RMF dashboard, and navigation software. My software development background includes freelance web work and C++ projects such as StringFlux.";
+
+export const siteDescription =
+  "Regional management and software engineering across machine learning, the RMF dashboard, and navigation. Independent projects in web software, audio DSP, and music.";
+
 export const resumeSummary =
-  "Robotics Technician at Barn Owl Precision with experience troubleshooting Windows and Linux systems, networks, connected hardware, and software. Previously, I supported complex simulator systems. Outside work, I build web software and audio DSP tools, write and produce music, and occasionally work on research prototypes. That work includes mmaitland.dev, StringFlux, NEUROCHEMICAL ENTROPY, and Research Radar.";
+  "Regional Manager and Software Engineer supporting the engineering team's machine learning work and contributing to the RMF dashboard and navigation software. Background in freelance web development and C++ audio software, including StringFlux.";
 
 export const resumeSkillTiers: ResumeSkillTier[] = [
   {
@@ -78,15 +86,12 @@ export const resumeExperience: ResumeExperienceItem[] = [
   {
     role: "Robotics Technician",
     company: "Barn Owl Precision",
-    period: "Current",
+    period: "Earlier experience",
     description:
-      "Hands-on robotics technician role supporting robotic systems that need to operate accurately and consistently in dust, heat, and day-to-day use.",
+      "Supported robotic systems operating in dust, heat, and daily field use.",
     highlights: [
       {
-        text: "Bring layer-by-layer troubleshooting habits from simulator support into robotics work, with emphasis on observation, isolation, and repeatable fixes.",
-      },
-      {
-        text: "Apply hardware, Windows, networking, and diagnostic experience in a hands-on equipment context.",
+        text: "Applied hardware, Windows, and networking experience through observation, fault isolation, and repeatable diagnostics.",
       },
     ],
   },
@@ -95,18 +100,18 @@ export const resumeExperience: ResumeExperienceItem[] = [
     company: "Self-directed",
     period: "2022 - Present",
     description:
-      "Web software and audio DSP projects developed outside of full-time work, alongside writing, recording, and producing original music.",
+      "Develop web software and audio DSP tools alongside writing, recording, and producing original music.",
     highlights: [
       {
         text: "Built mmaitland.dev with typed content, CI, smoke tests, contact validation, rate limiting, and optional admin workflows.",
         href: "https://www.mmaitland.dev",
       },
       {
-        text: "Building StringFlux in JUCE/C++ with a focus on stable real-time audio processing and a deliberately focused feature set.",
+        text: "Building StringFlux in JUCE/C++ for stable real-time audio processing.",
         href: "https://www.mmaitland.dev/stringflux",
       },
       {
-        text: "Write case studies and project notes that explain what I built, why I made certain choices, and what I would improve next.",
+        text: "Document design decisions, test results, and next steps in case studies and technical notes.",
       },
     ],
   },
@@ -118,11 +123,11 @@ export const resumeExperience: ResumeExperienceItem[] = [
       "Supported complex simulator systems remotely, often with incomplete logs and limited direct hardware access.",
     highlights: [
       {
-        text: "Built repeatable triage notes for recurring failure patterns so similar tickets started from the right isolation steps instead of from scratch.",
+        text: "Documented recurring failures and repeatable triage steps.",
         href: "/projects/full-swing-tech-support",
       },
       {
-        text: "Worked through customer-facing simulator issues by isolating symptoms, testing likely causes, and documenting repeatable fixes.",
+        text: "Diagnosed customer-facing simulator faults remotely through isolation and testing.",
       },
     ],
   },
@@ -138,14 +143,5 @@ export const resumeEducation: ResumeEducationItem[] = [
     degree: "Associate in General Studies",
     school: "Florida Southwestern State College",
     period: "January 2008 to December 2011",
-  },
-];
-
-export const resumeCertifications = [
-  {
-    name: "CompTIA A+",
-    period: "July 2023 to July 2026",
-    description:
-      "Validated hands-on skills across hardware, software, networking, troubleshooting, security, mobile devices, and customer support.",
   },
 ];

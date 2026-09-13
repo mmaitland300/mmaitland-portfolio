@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { Dialog } from "@base-ui/react/dialog";
 
 /** Left-to-right: simplest surface first, then waveform, then advanced. */
 const views = [
@@ -30,32 +31,16 @@ const views = [
 
 export function StringFluxPluginPreview() {
   const [active, setActive] = useState(0);
-  const [zoomed, setZoomed] = useState(false);
   const activeView = views[active];
 
-  useEffect(() => {
-    if (!zoomed) return;
-
-    function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") {
-        setZoomed(false);
-      }
-    }
-
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [zoomed]);
-
   return (
-    <>
+    <Dialog.Root>
       <figure className="overflow-hidden rounded-xl border border-border bg-zinc-950">
         <div
           id="stringflux-plugin-preview-panel"
           className="flex justify-center bg-zinc-950 p-2"
         >
-          <button
-            type="button"
-            onClick={() => setZoomed(true)}
+          <Dialog.Trigger
             className="group flex w-full justify-center cursor-zoom-in"
             aria-label={`Open StringFlux ${activeView.label} layout screenshot in full resolution`}
           >
@@ -71,7 +56,7 @@ export function StringFluxPluginPreview() {
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 700px"
               priority
             />
-          </button>
+          </Dialog.Trigger>
         </div>
         <div className="flex items-center justify-center gap-2 border-t border-border bg-zinc-950/80 px-4 py-2.5">
           <div
@@ -102,41 +87,44 @@ export function StringFluxPluginPreview() {
         </div>
       </figure>
 
-      {zoomed ? (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
-          onClick={() => setZoomed(false)}
-          role="dialog"
-          aria-modal="true"
-          aria-label="StringFlux layout full resolution preview"
-        >
-          <button
-            type="button"
-            onClick={() => setZoomed(false)}
-            className="absolute right-4 top-4 rounded border border-white/20 px-2.5 py-1 text-xs text-white/80 hover:bg-white/10 hover:text-white"
-            aria-label="Close full resolution preview"
+      <Dialog.Portal>
+        <Dialog.Backdrop className="fixed inset-0 z-50 bg-black/90" />
+        <Dialog.Viewport className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <Dialog.Popup
+            className="relative max-h-[calc(100dvh-2rem)] max-w-[calc(100vw-2rem)] rounded-lg bg-zinc-950 p-3 outline-none"
           >
-            Close
-          </button>
-
-          <div
-            className="max-h-[95vh] max-w-[95vw] overflow-auto"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <Image
-              src={activeView.src}
-              alt={activeView.alt}
-              width={activeView.width}
-              height={activeView.height}
-              quality={100}
-              unoptimized
-              className="h-auto w-auto max-w-none"
-              sizes="95vw"
-              priority
-            />
-          </div>
-        </div>
-      ) : null}
-    </>
+            <Dialog.Title className="sr-only">
+              StringFlux {activeView.label} layout full resolution preview
+            </Dialog.Title>
+            <div className="mb-3 flex justify-end">
+              <Dialog.Close
+                className="rounded border border-white/20 px-2.5 py-1 text-xs text-white/80 hover:bg-white/10 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                aria-label="Close full resolution preview"
+              >
+                Close
+              </Dialog.Close>
+            </div>
+            <div
+              className="max-h-[calc(100dvh-7rem)] max-w-full overflow-auto focus-visible:outline-2 focus-visible:outline-white"
+              tabIndex={0}
+              role="region"
+              aria-label="Scrollable full resolution screenshot"
+            >
+              <Image
+                src={activeView.src}
+                alt={activeView.alt}
+                width={activeView.width}
+                height={activeView.height}
+                quality={100}
+                unoptimized
+                className="h-auto w-auto max-w-none"
+                sizes="95vw"
+                priority
+              />
+            </div>
+          </Dialog.Popup>
+        </Dialog.Viewport>
+      </Dialog.Portal>
+    </Dialog.Root>
   );
 }

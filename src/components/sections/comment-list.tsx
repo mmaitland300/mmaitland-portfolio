@@ -1,11 +1,11 @@
 "use client";
 
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { EyeOff, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { hideComment, unhideComment } from "@/actions/comments";
+import { hideComment, unhideComment, type CommentActionResult } from "@/actions/comments";
 import { cn } from "@/lib/utils";
 
 export interface CommentData {
@@ -32,14 +32,19 @@ export function CommentList({
   inviteToPost = true,
 }: CommentListProps) {
   const [isPending, startTransition] = useTransition();
+  const [feedback, setFeedback] = useState<CommentActionResult | null>(null);
   const router = useRouter();
 
-  function runAction(action: () => Promise<unknown>) {
-    startTransition(() => {
-      void (async () => {
-        await action();
-        router.refresh();
-      })();
+  function runAction(action: () => Promise<CommentActionResult>) {
+    setFeedback(null);
+    startTransition(async () => {
+      try {
+        const result = await action();
+        setFeedback(result);
+        if (result.success) router.refresh();
+      } catch {
+        setFeedback({ success: false, message: "Could not update this comment. Please try again." });
+      }
     });
   }
 
@@ -55,6 +60,11 @@ export function CommentList({
 
   return (
     <div className="space-y-4">
+      {feedback && (
+        <p role={feedback.success ? "status" : "alert"} className="text-sm text-muted-foreground">
+          {feedback.message}
+        </p>
+      )}
       {comments.map((comment) => (
         <div
           key={comment.id}

@@ -6,6 +6,7 @@ import { SectionHeader } from "@/components/ui/section-header";
 import { getPublicContactEmail } from "@/lib/site-contact";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/contact" },
   title: "Contact",
   description:
     "Reach out about a web project, a technical question, the music, or anything else. Open to work conversations and happy to hear from anyone.",

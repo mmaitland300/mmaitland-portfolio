@@ -13,6 +13,7 @@ import { getProjectBySlug } from "@/content/projects";
 const PORTFOLIO_ARTIFACT_SRC = "/images/projects/portfolio-delivery-artifact.svg";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/projects/portfolio-site" },
   title: "How I Built mmaitland.dev",
   description:
     "How mmaitland.dev is built as a home for projects, music, writing, and things I am learning, including typed content, contact validation, an optional admin inbox, and the small set of services behind it.",
