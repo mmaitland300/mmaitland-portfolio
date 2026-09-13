@@ -125,8 +125,10 @@ export function AboutContent({ publicEmail }: AboutContentProps) {
               className="relative pl-6 border-l-2 border-border"
             >
               <div className="absolute -left-[7px] top-1.5 w-3 h-3 rounded-full bg-brand-violet border-2 border-background" />
-              <h3 className="font-semibold text-foreground">{exp.role}</h3>
-              <p className="text-sm text-brand-violet">{exp.company}</p>
+              <h3 className="font-bold text-foreground">{exp.role}</h3>
+              {exp.company ? (
+                <p className="text-sm text-brand-violet">{exp.company}</p>
+              ) : null}
               <p className="text-xs text-muted-foreground mt-0.5">
                 {exp.period}
               </p>

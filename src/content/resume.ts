@@ -12,7 +12,7 @@ export type ResumeHighlight = {
 
 export type ResumeExperienceItem = {
   role: string;
-  company: string;
+  company?: string;
   period: string;
   description: string;
   highlights?: ResumeHighlight[];
@@ -31,16 +31,16 @@ export type ResumeSkillTier = {
   skills: string[];
 };
 
-// Role names confirmed by Matt in September 2026. Add detailed employment
-// entries once the employer, start dates, and publishable scope are confirmed.
+// Matt's title is Regional Manager; his work focuses on software development
+// with management responsibilities. Employer and dates remain unverified.
 export const professionalIntro =
-  "I work in regional management and software engineering, contributing to machine learning, the RMF dashboard, and navigation software. My software development background includes freelance web work and C++ projects such as StringFlux.";
+  "I work in software development. My background includes freelance web development and C++ projects such as StringFlux.";
 
 export const siteDescription =
-  "Regional management and software engineering across machine learning, the RMF dashboard, and navigation. Independent projects in web software, audio DSP, and music.";
+  "Software developer. Web applications, audio software, and original music.";
 
 export const resumeSummary =
-  "Regional Manager and Software Engineer supporting the engineering team's machine learning work and contributing to the RMF dashboard and navigation software. Background in freelance web development and C++ audio software, including StringFlux.";
+  "Software developer with experience in freelance web development and C++ audio software.";
 
 export const resumeSkillTiers: ResumeSkillTier[] = [
   {
@@ -83,6 +83,12 @@ export const resumeSkillTiers: ResumeSkillTier[] = [
 ];
 
 export const resumeExperience: ResumeExperienceItem[] = [
+  {
+    role: "Regional Manager",
+    period: "Current",
+    description:
+      "Focus on software development alongside management responsibilities.",
+  },
   {
     role: "Robotics Technician",
     company: "Barn Owl Precision",
