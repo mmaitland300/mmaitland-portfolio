@@ -14,9 +14,10 @@ This update addresses the main findings from [the site review](site-review-2026-
 
 Public introductions use "software developer." Keep individual work projects out of introductory copy.
 
-The owner confirmed a Regional Manager title with a focus on software development and some management duties. Development work includes the RMF dashboard, navigation, and contributions to machine learning within the engineering team. No private employment documents are included here. Detailed employment entries still need:
+Keep PRs and coding updates concise. Public site copy can include music, personal context, and a fuller narrative where they serve the page.
 
-- Employer, start month, and role chronology.
+The offer letter confirms Regional Manager at BOPA Precision Agriculture, Inc., starting August 11, 2026. Its scope includes Colorado deployments and customer support, engineering coordination, and ML/CV work. Matt also confirmed software development contributions. Describe these responsibilities without making management secondary. No private employment documents are included here. Remaining details:
+
 - The end date or continuing scope of Robotics Technician work, and Auxillium's end month.
 - Two or three publishable achievements for the current role, including responsibilities, technology, and outcomes.
 

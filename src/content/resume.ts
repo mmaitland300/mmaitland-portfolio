@@ -31,8 +31,8 @@ export type ResumeSkillTier = {
   skills: string[];
 };
 
-// Matt's title is Regional Manager; his work focuses on software development
-// with management responsibilities. Employer and dates remain unverified.
+// Title, employer, and start date verified against the August 11, 2026 offer
+// letter. Software development contributions are also confirmed by Matt.
 export const professionalIntro =
   "I work in software development. My background includes freelance web development and C++ projects such as StringFlux.";
 
@@ -85,9 +85,10 @@ export const resumeSkillTiers: ResumeSkillTier[] = [
 export const resumeExperience: ResumeExperienceItem[] = [
   {
     role: "Regional Manager",
-    period: "Current",
+    company: "BOPA Precision Agriculture, Inc.",
+    period: "August 2026 - Present",
     description:
-      "Focus on software development alongside management responsibilities.",
+      "Manage Colorado deployments and customer support, coordinate with engineering, and contribute to software development and machine learning.",
   },
   {
     role: "Robotics Technician",
