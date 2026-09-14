@@ -8,10 +8,10 @@ import {
   Code2,
   Briefcase,
   GraduationCap,
-  Github,
   FileDown,
   Mail,
 } from "lucide-react";
+import { GitHubIcon } from "@/components/icons/github-icon";
 import { buttonVariants } from "@/components/ui/button-variants";
 import {
   professionalIntro,
@@ -191,7 +191,7 @@ export function AboutContent({ publicEmail }: AboutContentProps) {
           rel="noopener noreferrer"
           className={buttonVariants({ variant: "outline" })}
         >
-          <Github className="mr-2 h-4 w-4" /> GitHub
+          <GitHubIcon className="mr-2 h-4 w-4" /> GitHub
         </a>
         <a
           href={`mailto:${publicEmail}`}

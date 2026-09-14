@@ -1,4 +1,5 @@
-import { FileDown, Github, Mail, MapPin } from "lucide-react";
+import { FileDown, Mail, MapPin } from "lucide-react";
+import { GitHubIcon } from "@/components/icons/github-icon";
 import { cn } from "@/lib/utils";
 import {
   contactInfo,
@@ -232,7 +233,7 @@ export function ResumeDocument({
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 transition-colors hover:text-foreground"
           >
-            <Github className="h-4 w-4" />
+            <GitHubIcon className="h-4 w-4" />
             github.com/mmaitland300
           </a>
         </div>

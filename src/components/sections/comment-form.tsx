@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useEffect, useId, useRef, useState } from "react";
-import { Github } from "lucide-react";
+import { GitHubIcon } from "@/components/icons/github-icon";
 import { Button } from "@/components/ui/button";
 import { submitComment, type CommentActionResult } from "@/actions/comments";
 import { signInWithGitHub } from "@/actions/auth";
@@ -47,7 +47,7 @@ export function CommentForm({
         }}
       >
         <Button type="submit" variant="outline" size="sm">
-          <Github className="mr-2 h-4 w-4" /> Sign in with GitHub to leave a
+          <GitHubIcon className="mr-2 h-4 w-4" /> Sign in with GitHub to leave a
           question or comment
         </Button>
       </form>

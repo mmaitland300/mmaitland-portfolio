@@ -2,7 +2,7 @@
   "version": 1,
   "sources": {
     "src/content/resume.ts": "b6de1ac4adb3295d3c17ae0a613e46d37459d5e39fa28fb3770b50ae67253b6c",
-    "src/components/resume/resume-document.tsx": "33cc4345b829f561ae97bbccd18dacfaab967125abff44cce2261bb9998c1ad9",
+    "src/components/resume/resume-document.tsx": "5bae1381957548154bad7ffaa3d5b06585274938b3800816c6212f8371ad0824",
     "src/app/resume/print/page.tsx": "98295df985d61efe567f956fdccdd349dd36fdf7d83d20693e3c55352c574d39",
     "src/app/resume/print/layout.tsx": "cbc85d434ac467185422ca6c4270f11d299373e3c69eaef788fbaffe0e1a464e",
     "src/app/globals.css": "df1f5e2fa40642bd7a9c9ca768ce9acf1375801052ec3039fa0b32a83e44c22c",
@@ -11,5 +11,5 @@
     "scripts/generate-resume-pdf.mjs": "9440e4cee0a4185c8b7901f54f094dafa07b00764c5af015f371992d1a9f3ad7",
     "scripts/resume-pdf-manifest.mjs": "c1a414b7cb39a96998ee0b4e7ca0431dd017a32525bb500a32466fe0517934ab"
   },
-  "pdf": "fb241f412765db8622dc49106a860195ab4903ea64f22458e42d4e183fd352fe"
+  "pdf": "ed86cce52c95383cddddba717064d4f3fdeb68332be62ab5df8e9ccf1ac541ab"
 }

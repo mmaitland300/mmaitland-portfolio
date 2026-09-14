@@ -8,7 +8,17 @@ updates:
       time: "09:00"
       timezone: America/Denver
     open-pull-requests-limit: 5
+    # Defer routine major upgrades until the migrations in docs/dependency-updates.md.
+    # update-types leaves security updates eligible; do not replace with version ranges.
+    ignore:
+      - dependency-name: prisma
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@prisma/client"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: typescript
+        update-types: ["version-update:semver-major"]
     groups:
+      # Keep coupled packages ahead of the routine catch-all.
       next:
         patterns:
           - next
@@ -29,6 +39,11 @@ updates:
         patterns:
           - tailwindcss
           - "@tailwindcss/*"
+      routine:
+        applies-to: version-updates
+        patterns:
+          - "*"
+        update-types: [minor, patch]
     commit-message:
       prefix: "chore(deps)"
   - package-ecosystem: github-actions
@@ -39,5 +54,6 @@ updates:
       actions:
         patterns:
           - "*"
+        update-types: [minor, patch]
     commit-message:
       prefix: "chore(ci)"

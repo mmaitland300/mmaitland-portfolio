@@ -4,7 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ExternalLink, Github, Gamepad2, Play, X } from "lucide-react";
+import { ExternalLink, Gamepad2, Play, X } from "lucide-react";
+import { GitHubIcon } from "@/components/icons/github-icon";
 import { Badge } from "@/components/ui/badge";
 import type { Project } from "@/content/projects";
 
@@ -387,7 +388,7 @@ export function ProjectCard({ project, index, compact }: ProjectCardProps) {
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground"
             >
-              <Github size={14} /> Code
+              <GitHubIcon size={14} /> Code
             </a>
           )}
           {project.iframe && (
