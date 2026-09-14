@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Github, Mail, Music2 } from "lucide-react";
+import { Mail, Music2 } from "lucide-react";
+import { GitHubIcon } from "@/components/icons/github-icon";
 import { getPublicMailtoHref } from "@/lib/site-contact";
 import { siteNavLinks } from "@/lib/site-nav";
 import { siteDescription } from "@/content/resume";
@@ -9,7 +10,7 @@ export function Footer() {
     {
       href: "https://github.com/mmaitland300",
       label: "GitHub",
-      icon: Github,
+      icon: GitHubIcon,
     },
     {
       href: "https://soundcloud.com/matthew_maitland",

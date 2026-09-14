@@ -15,13 +15,17 @@ export function Hero() {
           <span className="accent-title hero-name">Matt Maitland</span>
         </h1>
         <h2 className="mx-auto mt-6 max-w-4xl text-2xl font-semibold leading-tight text-foreground/95 sm:text-3xl">
-          I work in software development. Outside of work, I build audio tools
-          and write and produce music.
+          I work in software development, building on a background in freelance
+          web projects and hands-on troubleshooting.
         </h2>
         <p className="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-          This site is where I share software projects, audio DSP work, research
-          experiments, technical notes, and music, along with what I learn while
-          making them.
+          Outside of work, I like to explore the overlap between software and
+          sound: developing audio tools,
+          experimenting with DSP, and writing and producing music.
+        </p>
+        <p className="mx-auto mt-4 max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+          This site brings together my projects, experiments, and music, with
+          notes on what I tried, what worked, and what I would change next time.
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Link href="/projects" className={buttonVariants({ variant: "brandCta", size: "lg" })}>

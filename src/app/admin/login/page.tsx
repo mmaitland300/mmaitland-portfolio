@@ -1,6 +1,7 @@
 import { auth, signIn } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import { Github, ShieldAlert } from "lucide-react";
+import { ShieldAlert } from "lucide-react";
+import { GitHubIcon } from "@/components/icons/github-icon";
 import { Button } from "@/components/ui/button";
 import { isAdmin } from "@/lib/admin";
 import { isAdminAuthConfigured } from "@/lib/feature-config";
@@ -75,7 +76,7 @@ export default async function AdminLoginPage() {
           }}
         >
           <Button type="submit" variant="brandCta">
-            <Github className="mr-2 h-4 w-4" />
+            <GitHubIcon className="mr-2 h-4 w-4" />
             Sign in with GitHub
           </Button>
         </form>

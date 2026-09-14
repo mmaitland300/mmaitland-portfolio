@@ -9,8 +9,8 @@ import {
   ListChecks,
   AlertTriangle,
   ExternalLink,
-  Github,
 } from "lucide-react";
+import { GitHubIcon } from "@/components/icons/github-icon";
 import { Badge } from "@/components/ui/badge";
 import { SectionHeader } from "@/components/ui/section-header";
 import { ProjectComments } from "@/components/sections/project-comments";
@@ -149,7 +149,7 @@ export default function SnakeDetectorCaseStudyPage() {
                   rel="noopener noreferrer"
                   className={cn(ctaBaseClassName, ctaGhostClassName)}
                 >
-                  <Github size={16} className="mr-1.5" />
+                  <GitHubIcon size={16} className="mr-1.5" />
                   Code
                 </a>
               </>

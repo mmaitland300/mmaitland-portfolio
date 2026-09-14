@@ -7,12 +7,12 @@ import {
   ArrowLeft,
   BarChart3,
   ExternalLink,
-  Github,
   Microscope,
   Network,
   SearchCheck,
   Sparkles,
 } from "lucide-react";
+import { GitHubIcon } from "@/components/icons/github-icon";
 import { MainContentAnchor } from "@/components/layout/main-content-anchor";
 import { ProjectComments } from "@/components/sections/project-comments";
 import { CaseStudyEvidenceFooter } from "@/components/sections/case-study-evidence-footer";
@@ -211,7 +211,7 @@ export default function ResearchRadarCaseStudyPage() {
                   rel="noopener noreferrer"
                   className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
                 >
-                  <Github className="mr-1.5 h-4 w-4" />
+                  <GitHubIcon className="mr-1.5 h-4 w-4" />
                   View source
                 </a>
                 <a

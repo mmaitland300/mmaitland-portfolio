@@ -21,6 +21,8 @@ Work usually lands on `main` through pull requests. Occasional small maintainer 
 
 CI on `main` runs lint, unit/data tests, production build, and Playwright smoke tests. Treat green `main` as the release line for deployment, for example Vercel production from `main`.
 
+See [dependency updates](dependency-updates.md) for Dependabot grouping, deferred migrations, and review requirements.
+
 ## Maintenance Cadence
 
 - **Weekly:** Ship one content/status task and one polish/maintenance task.
